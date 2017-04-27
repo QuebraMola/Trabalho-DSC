@@ -2,8 +2,7 @@
 
 Disciplina: Desenvolvimento de Sistemas Corporativos
 Profº: Petrônio Cândido
-Acadêmico: João Pedro Viana
-
+Acadêmico: João Pedro Viana Guimarães
 -------------------- MiniMundo --------------------
 	O Sistema Será voltado para gerenciamento de comércio em geral. O Sistema deverá ajudar o comércio
 a melhorar o seu estoque e ter um controle maior de seus lucros ou prejuizos, a compra e venda de produtos
