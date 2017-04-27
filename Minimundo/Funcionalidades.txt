@@ -1,7 +1,4 @@
-------------------------TEMA---------------------------
-Sistema para Gerenciamento de estoque
-
-----------------------Mini Mundo--------------------------
+----------------------Funcionalidades--------------------------
 O Sistema deverá Gerenciar a parte de estoque de um comércio
 Poderá adicionar novos produtos
 Poderá excluir produtos
