@@ -1,0 +1,10 @@
+----------------------Funcionalidades--------------------------
+O Sistema deverá Gerenciar a parte de estoque de um comércio
+Poderá adicionar novos produtos
+Poderá excluir produtos
+Poderá acrescentar e reduzir produtos
+Poderá adicionar fornecedor
+Poderá relacionar produto com o fornecedor do determinado produto
+Poderá adicionar valores a seu produto de acordo com a porcentagem de lucro desejada do valor de compra
+Poderá retirar uma nota no final de cada mês com o balanço de estoque
+  
