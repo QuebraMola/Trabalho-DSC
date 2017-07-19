@@ -5,15 +5,19 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Pessoa;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
+
 /**
  *
  * @author junior-ormundo
  */
-public class PessoaEditar extends javax.swing.JInternalFrame {
+public class PessoaEditar extends TelaEditar<Pessoa> {
 
     /**
      * Creates new form PessoaEditar
      */
+    
     public PessoaEditar() {
         initComponents();
     }
@@ -39,10 +43,10 @@ public class PessoaEditar extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
 
         setClosable(true);
-        setTitle("Buscar Pessoas");
+        setTitle("Editar Pessoas");
         setName(""); // NOI18N
 
-        jLabel1.setText("Nome:");
+        jLabel1.setText("Nome Completo:");
 
         jLabel2.setText("Nome de Usuario:");
 
@@ -70,34 +74,40 @@ public class PessoaEditar extends javax.swing.JInternalFrame {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
                                 .addComponent(txtNomeUsuario))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtCpf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                                .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING))))
+                                .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(206, 206, 206)
+                        .addGap(104, 104, 104)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(227, 227, 227))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +128,7 @@ public class PessoaEditar extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
@@ -139,8 +149,12 @@ public class PessoaEditar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+        salvar();
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        cancelar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -155,4 +169,31 @@ public class PessoaEditar extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNomeUsuario;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void carregaCampos() {
+        txtNome.setText(entidade.getNomeCompleto());
+        txtNomeUsuario.setText(entidade.getNomeUsuario());
+        txtCpf.setText(entidade.getCpf());
+        txtSenha.setText(entidade.getSenha());
+        
+    }
+
+    @Override
+    public void carregaObjeto() throws RegraNegocioException {
+        entidade.setNomeCompleto(txtNome.getText());
+        entidade.setNomeUsuario(txtNomeUsuario.getText());
+        entidade.setCpf(txtCpf.getText());
+        entidade.setSenha(String.copyValueOf(txtSenha.getPassword()));
+        
+        }
+
+    @Override
+    public boolean verificarCamposObrigatorios() {
+        return txtNome.getText().length() > 5 &&
+               txtNomeUsuario.getText().length() > 3 &&
+               txtCpf.getText().length() == 11 &&
+               txtSenha.getPassword().length > 3;
+                
+    }
 }
