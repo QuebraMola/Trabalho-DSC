@@ -18,15 +18,15 @@ public class Pessoa implements Entidade {
    private String nomeUsuario;
    private String cpf;
    private String senha;
-   private tipoPessoa tipo;
+/*   private tipoPessoa tipo;*/
 
-    public Pessoa(int id, String nomeCompleto, String cpf, String nomeUsuario, String senha, tipoPessoa tipo) {
+    public Pessoa(int id, String nomeCompleto, String cpf, String nomeUsuario, String senha) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.cpf = cpf;
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
-        this.tipo = tipo;
+      /*  this.tipo = tipo;*/
     }
 
     public Pessoa() {
@@ -39,6 +39,7 @@ public class Pessoa implements Entidade {
     public void setCpf(String cpf) throws RegraNegocioException {
         if(cpf.contains("^[a-z]"))
              throw new RegraNegocioException("O Cpf deve conter Apenas Números !!!");
+        
         this.cpf = cpf;
         
     }
@@ -86,13 +87,13 @@ public class Pessoa implements Entidade {
         this.senha = senha;
     }
 
-    public tipoPessoa getTipo() {
+   /* public tipoPessoa getTipo() {
         return tipo;
     }
 
     public void setTipo(tipoPessoa tipo) {
         this.tipo = tipo;
-    }
+    }*/
 
     @Override
     public int hashCode() {
@@ -102,7 +103,7 @@ public class Pessoa implements Entidade {
         hash = 53 * hash + Objects.hashCode(this.nomeUsuario);
         hash = 53 * hash + Objects.hashCode(this.cpf);
         hash = 53 * hash + Objects.hashCode(this.senha);
-        hash = 53 * hash + Objects.hashCode(this.tipo);
+    //    hash = 53 * hash + Objects.hashCode(this.tipo);
         return hash;
     }
 
@@ -133,9 +134,9 @@ public class Pessoa implements Entidade {
         if (!Objects.equals(this.senha, other.senha)) {
             return false;
         }
-        if (this.tipo != other.tipo) {
+     /*   if (this.tipo != other.tipo) {
             return false;
-        }
+        }*/
         return true;
     }
 
