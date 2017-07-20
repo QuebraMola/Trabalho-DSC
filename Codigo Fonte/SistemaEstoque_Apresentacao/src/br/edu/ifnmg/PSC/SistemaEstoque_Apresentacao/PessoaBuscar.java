@@ -6,8 +6,12 @@
 package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Pessoa;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Repositorio;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,9 +45,10 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
         tblBuscar = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnApagar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
+        btnApagar = new javax.swing.JButton();
 
+        setClosable(true);
         setTitle("Buscar Pessoas");
 
         jLabel1.setText("Nome Completo:");
@@ -64,6 +69,11 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
         jScrollPane1.setViewportView(tblBuscar);
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -72,9 +82,19 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
             }
         });
 
-        btnApagar.setText("Apagar");
-
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+
+        btnApagar.setText("Apagar");
+        btnApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApagarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,7 +123,7 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83)
+                        .addGap(80, 80, 80)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -125,9 +145,9 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(btnEditar)
-                    .addComponent(btnApagar)
-                    .addComponent(btnNovo))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(btnNovo)
+                    .addComponent(btnApagar))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -137,19 +157,64 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
         editar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        novo();
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscar();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+        apagar();
+    }//GEN-LAST:event_btnApagarActionPerformed
+
+    
+    
     @Override
     public int retornaIdSelecionado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int linha = tblBuscar.getSelectedRow();
+        int id = Integer.parseInt( tblBuscar.getModel().getValueAt(linha, 0).toString() );
+        return id;    
     }
 
     @Override
     public void preencheFiltro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            if(! txtNomeCompleto.getText().isEmpty())
+                filtro.setNomeCompleto(txtNomeCompleto.getText());
+            if(! txtNomeUsuario.getText().isEmpty())
+                filtro.setNomeUsuario(txtNomeUsuario.getText());
+            
+        } catch (RegraNegocioException ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
     }
 
     @Override
     public void preencheTabela(List<Pessoa> listagem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+              
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+               
+        modelo.addColumn("ID");
+        modelo.addColumn("Nome Completo");
+        modelo.addColumn("Nome de Usuário");
+        modelo.addColumn("CPF");
+        
+       
+        for(Pessoa s : listagem){
+            Vector linha = new Vector();
+            linha.add(s.getId());
+            linha.add(s.getNomeCompleto());
+            linha.add(s.getNomeUsuario());
+            linha.add(s.getCpf());
+            
+            modelo.addRow(linha);
+        }
+        
+        tblBuscar.setModel(modelo);
     }
 
 

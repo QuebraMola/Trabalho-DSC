@@ -9,6 +9,7 @@ import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Repositorio;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,6 +65,25 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         
         this.setVisible(false);
     }
+    
+    public void apagar(){
+        int id =retornaIdSelecionado();
+        
+        filtro = repositorio.Abrir(id);
+        
+        if(JOptionPane.showConfirmDialog(rootPane, "Deseja realmente apagar o registro?") == 0 ){
+            Q entidade;
+            if(repositorio.Apagar(filtro)){
+                JOptionPane.showMessageDialog(rootPane, "Registro removido com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Falha ao remover o registro!");
+            }
+        }  else {
+            JOptionPane.showMessageDialog(rootPane, "Operação Cancelada!");
+        }
+    
+    }
+    
     
     public void editar(){
         int id = retornaIdSelecionado();
