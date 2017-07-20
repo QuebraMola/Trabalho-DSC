@@ -35,12 +35,19 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
     }
     
     public void buscar() {
+        
+        
+        
         preencheFiltro();
         
         List<Q> listagem = repositorio.Buscar(filtro);
         
         preencheTabela(listagem);
+       
+        
     }
+    
+    
     
     public void novo() {
         
@@ -60,26 +67,29 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         tela_editar.setEntidade(filtro);
         
         this.getParent().add(tela_editar);
-        
+       
         tela_editar.setVisible(true);
         
         this.setVisible(false);
     }
-    
+   
     public void apagar(){
         int id =retornaIdSelecionado();
         
+        filtro = repositorio.Abrir(id);
         
-        if(JOptionPane.showConfirmDialog(rootPane, "Deseja realmente apagar o registro?") == 0 ){
+        if(JOptionPane.showConfirmDialog(rootPane, "Deseja realmente apagar?") == 0 ){
             Q entidade;
             if(repositorio.Apagar(filtro)){
-                JOptionPane.showMessageDialog(rootPane, "Registro removido com sucesso!");
+                JOptionPane.showMessageDialog(rootPane, "Apagado com sucesso!");
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Falha ao remover o registro!");
+                JOptionPane.showMessageDialog(rootPane, "Falha ao Apagar!");
             }
         }  else {
             JOptionPane.showMessageDialog(rootPane, "Operação Cancelada!");
         }
+        
+        
     
     }
     
@@ -89,26 +99,7 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         
         filtro = repositorio.Abrir(id);
         
-        try {
-            tela_editar = (TelaEditar<Q>) tipo_tela.newInstance();
-            
-        } catch (InstantiationException ex) {
-            Logger.getLogger(TelaBuscar.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(TelaBuscar.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
-        tela_editar.setBuscar(this);
-        
-        tela_editar.setRepositorio(repositorio);
-        
-        tela_editar.setEntidade(filtro);
-        
-        this.getParent().add(tela_editar);
-        
-        tela_editar.setVisible(true);
-        
-        this.setVisible(false);
     }
    
     

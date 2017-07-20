@@ -134,7 +134,7 @@ public abstract class DAOGenerico <Q extends Entidade> implements Repositorio<Q>
            
         
            List<Q> lista = new ArrayList<>();
-        
+       
         try {
             
             if(filtro != null)

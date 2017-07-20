@@ -60,7 +60,7 @@ public abstract class TelaEditar<Q extends Entidade> extends javax.swing.JIntern
             return;
         }
             
-        if(JOptionPane.showConfirmDialog(rootPane, "Deseja realmente salvar o objeto?") == 0 ){
+        if(JOptionPane.showConfirmDialog(rootPane, "Deseja Salvar?") == 0 ){
 
             try {
                 carregaObjeto();
@@ -71,9 +71,9 @@ public abstract class TelaEditar<Q extends Entidade> extends javax.swing.JIntern
             }
             
             if(repositorio.Salvar(entidade)){
-                JOptionPane.showMessageDialog(rootPane, "Registro salvo com sucesso!");
+                JOptionPane.showMessageDialog(rootPane, "Item salvo com sucesso!");
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Falha ao salvar o registro!");
+                JOptionPane.showMessageDialog(rootPane, "Falha ao salvar o Item!");
             }
             
         } else {

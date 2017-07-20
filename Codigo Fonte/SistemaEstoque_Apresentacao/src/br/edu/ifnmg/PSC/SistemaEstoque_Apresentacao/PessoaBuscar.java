@@ -163,6 +163,7 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscar();
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
@@ -174,7 +175,7 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
     @Override
     public int retornaIdSelecionado() {
         int linha = tblBuscar.getSelectedRow();
-        int id = Integer.parseInt( tblBuscar.getModel().getValueAt(linha, 0).toString() );
+        int id = Integer.parseInt(tblBuscar.getModel().getValueAt(linha, 0).toString() );
         return id;    
     }
 
