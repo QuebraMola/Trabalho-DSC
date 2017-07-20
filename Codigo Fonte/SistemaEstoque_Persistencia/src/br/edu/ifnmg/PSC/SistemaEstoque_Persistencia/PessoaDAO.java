@@ -44,7 +44,7 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
 
     @Override
     protected String getConsultaAbrir() {
-            return "select id,nomeCompleto,cpf,nomeUsuario,senha from pessoas where=?";
+            return "select nomeCompleto,cpf,nomeUsuario from pessoas where=?";
     }
 
     @Override

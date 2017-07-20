@@ -38,7 +38,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gerenciamento Quebra-Mola");
+        setTitle("Gerenciamento de Estoque Quebra-Mola");
 
         mnuPessoa.setText("Cadastros");
 

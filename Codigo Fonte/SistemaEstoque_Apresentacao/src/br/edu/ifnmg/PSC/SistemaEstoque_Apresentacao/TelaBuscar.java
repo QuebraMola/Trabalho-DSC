@@ -69,7 +69,6 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
     public void apagar(){
         int id =retornaIdSelecionado();
         
-        filtro = repositorio.Abrir(id);
         
         if(JOptionPane.showConfirmDialog(rootPane, "Deseja realmente apagar o registro?") == 0 ){
             Q entidade;

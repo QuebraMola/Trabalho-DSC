@@ -79,6 +79,8 @@ public abstract class TelaEditar<Q extends Entidade> extends javax.swing.JIntern
         } else {
             JOptionPane.showMessageDialog(rootPane, "Operação Cancelada!");
         }
+        
+        cancelar();
     }
     
     
