@@ -36,12 +36,8 @@ public class Pessoa implements Entidade {
         return cpf;
     }
 
-    public void setCpf(String cpf) throws RegraNegocioException {
-        if(cpf.contains("^[a-z]"))
-             throw new RegraNegocioException("O Cpf deve conter Apenas Números !!!");
-        
+    public void setCpf(String cpf){     
         this.cpf = cpf;
-        
     }
     
 

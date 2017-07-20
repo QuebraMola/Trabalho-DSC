@@ -21,6 +21,16 @@ public abstract class TelaEditar<Q extends Entidade> extends javax.swing.JIntern
     Repositorio<Q> repositorio;
     Q entidade;
 
+    TelaBuscar<Q> buscar;
+
+    public TelaBuscar<Q> getBuscar() {
+        return buscar;
+    }
+
+    public void setBuscar(TelaBuscar<Q> buscar) {
+        this.buscar = buscar;
+    }
+    
     public TelaEditar() {
     }
 
@@ -73,6 +83,7 @@ public abstract class TelaEditar<Q extends Entidade> extends javax.swing.JIntern
     
     
     public void cancelar(){
+        buscar.setVisible(true);
         this.setVisible(false);
         this.dispose();
     }

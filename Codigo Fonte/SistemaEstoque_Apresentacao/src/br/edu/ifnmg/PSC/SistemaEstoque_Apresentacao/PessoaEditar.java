@@ -160,11 +160,11 @@ public class PessoaEditar extends TelaEditar<Pessoa> {
     }
 
     @Override
-    public void carregaObjeto() throws RegraNegocioException {
+    public void carregaObjeto() throws RegraNegocioException{
         entidade.setNomeCompleto(txtNome.getText());
         entidade.setNomeUsuario(txtNomeUsuario.getText());
         entidade.setCpf(txtCpf.getText());
-        entidade.setSenha(String.copyValueOf(txtSenha.getPassword()));
+        entidade.setSenha(String.copyValueOf( txtSenha.getPassword()));
    
     }
 
