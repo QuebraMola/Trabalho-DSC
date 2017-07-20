@@ -150,7 +150,7 @@ public abstract class DAOGenerico <Q extends Entidade> implements Repositorio<Q>
             ResultSet resultado = sql.executeQuery();
             
             while(resultado.next())
-                lista.add( this.setDados(resultado) );
+                lista.add(this.setDados(resultado) );
             
             this.where = "";
             

@@ -49,7 +49,7 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
 
     @Override
     protected String getConsultaBuscar() {
-            return "select id,nomeCompleto,nomeUsuario from pessoas";
+            return "select id,nomeCompleto,cpf,nomeUsuario from pessoas";
     }
     
 
@@ -77,8 +77,8 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
         try {
             
             sql.setString(1, obj.getNomeCompleto());
-            sql.setString(2,obj.getCpf());
-            sql.setString(3, obj.getNomeUsuario());
+            sql.setString(2, obj.getNomeUsuario());
+            sql.setString(3,obj.getCpf());
             sql.setString(4, obj.getSenha());
             
             if(obj.getId() > 0)
@@ -94,11 +94,11 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
         try {
 
             Pessoa obj = new Pessoa();
-            obj.setId( resultado.getInt("id") );
-            obj.setNomeCompleto(resultado.getString("nomeCompleto") );
-            obj.setCpf(resultado.getString("cpf") );
-            obj.setNomeUsuario(resultado.getString("nomeUsuario") );
-            obj.setSenha( resultado.getString("senha") );
+            obj.setId(resultado.getInt("id"));
+            obj.setNomeCompleto(resultado.getString("nomeCompleto"));
+            obj.setCpf(resultado.getString("cpf"));
+            obj.setNomeUsuario(resultado.getString("nomeUsuario"));
+            //obj.setSenha(resultado.getString("senha"));
             
             return obj;
             

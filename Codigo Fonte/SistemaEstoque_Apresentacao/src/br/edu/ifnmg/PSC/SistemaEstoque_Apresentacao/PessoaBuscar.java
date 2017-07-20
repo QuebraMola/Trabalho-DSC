@@ -200,16 +200,16 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
                
         modelo.addColumn("ID");
         modelo.addColumn("Nome Completo");
+        modelo.addColumn("cpf");
         modelo.addColumn("Nome de Usuário");
-        modelo.addColumn("CPF");
         
        
         for(Pessoa s : listagem){
             Vector linha = new Vector();
             linha.add(s.getId());
             linha.add(s.getNomeCompleto());
-            linha.add(s.getNomeUsuario());
             linha.add(s.getCpf());
+            linha.add(s.getNomeUsuario());
             
             modelo.addRow(linha);
         }
