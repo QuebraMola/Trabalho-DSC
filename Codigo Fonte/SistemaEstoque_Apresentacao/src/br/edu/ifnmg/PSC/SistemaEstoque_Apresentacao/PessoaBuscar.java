@@ -197,7 +197,6 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
               
         
         DefaultTableModel modelo = new DefaultTableModel();
-        
                
         modelo.addColumn("ID");
         modelo.addColumn("Nome Completo");

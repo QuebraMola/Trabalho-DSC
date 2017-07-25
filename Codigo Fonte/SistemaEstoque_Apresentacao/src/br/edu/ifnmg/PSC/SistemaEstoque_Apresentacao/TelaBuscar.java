@@ -81,7 +81,7 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         if(JOptionPane.showConfirmDialog(rootPane, "Deseja realmente apagar?") == 0 ){
             Q entidade;
             if(repositorio.Apagar(filtro)){
-                JOptionPane.showMessageDialog(rootPane, "Apagado com sucesso!");
+                JOptionPane.showMessageDialog(rootPane, "Apagado com sucesso!");      
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Falha ao Apagar!");
             }
@@ -98,6 +98,7 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         int id = retornaIdSelecionado();
         
         filtro = repositorio.Abrir(id);
+        
         
         
     }

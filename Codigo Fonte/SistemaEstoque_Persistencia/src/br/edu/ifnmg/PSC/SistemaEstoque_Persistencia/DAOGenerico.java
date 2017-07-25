@@ -48,6 +48,7 @@ public abstract class DAOGenerico <Q extends Entidade> implements Repositorio<Q>
 
     @Override
     public boolean Salvar(Q obj) {
+       
         PreparedStatement sql = null;
         
         try{
@@ -81,6 +82,7 @@ public abstract class DAOGenerico <Q extends Entidade> implements Repositorio<Q>
             
             if (sql.executeUpdate() > 0) {
                 obj = null;
+                
                 return true;
             } else 
                 return false;
@@ -140,13 +142,16 @@ public abstract class DAOGenerico <Q extends Entidade> implements Repositorio<Q>
             if(filtro != null)
                 this.setBuscaFiltros(filtro);
             
-            String sqlfinal = this.getConsultaBuscar();
+            
+             String sqlfinal = this.getConsultaBuscar();
+          
             
             if(! where.isEmpty())
                 sqlfinal += " where " + where;
-            
+          
             PreparedStatement sql = conexao.prepareStatement(sqlfinal);
-                       
+
+            
             ResultSet resultado = sql.executeQuery();
             
             while(resultado.next())
@@ -159,6 +164,8 @@ public abstract class DAOGenerico <Q extends Entidade> implements Repositorio<Q>
         } catch (SQLException ex) {
             Logger.getLogger(DAOGenerico.class.getName()).log(Level.SEVERE, null, ex);
         }
+ 
+        
         return null;
     }
 }
