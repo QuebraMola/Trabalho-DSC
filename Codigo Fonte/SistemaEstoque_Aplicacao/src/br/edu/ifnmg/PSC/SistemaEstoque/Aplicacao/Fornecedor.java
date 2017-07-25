@@ -29,11 +29,13 @@ public class Fornecedor implements Entidade {
      }
 
 
-    public String getNome() {
+    public String getNome()  {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome)throws RegraNegocioException {
+        if(nome.length()< 5)
+               throw new RegraNegocioException("O Nome do Fornecedor deve ter mais de 5 caracteres!");        
         this.nome = nome;
     }
 
@@ -94,12 +96,11 @@ public class Fornecedor implements Entidade {
     
     @Override
     public void setId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        this.id = id;}
 
     @Override
     public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
     }
     
 }

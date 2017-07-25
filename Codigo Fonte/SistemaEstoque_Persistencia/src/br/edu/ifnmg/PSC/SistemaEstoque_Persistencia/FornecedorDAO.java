@@ -26,7 +26,7 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
     
     @Override
     protected String getConsultaInsert() {
-       return "insert into fornecedores(nome,cnpj,telefone) values (?,?,?,?) ";
+       return "insert into fornecedores(nome,cnpj,telefone) values (?,?,?) ";
   }
 
     @Override
@@ -41,13 +41,13 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
 
     @Override
     protected String getConsultaAbrir() {
-        return "select id,nomeCompleto,cpf,nomeUsuario,senha from pessoas where id=?";
+        return "select id,nome,cnpj,telefone from fornecedores where id=?";
 
     }
 
     @Override
     protected String getConsultaBuscar() {
-        return "select id,nomeCompleto,cpf,nomeUsuario from pessoas";
+        return "select id,nome,cnpj,telefone from fornecedores";
     }
 
     @Override

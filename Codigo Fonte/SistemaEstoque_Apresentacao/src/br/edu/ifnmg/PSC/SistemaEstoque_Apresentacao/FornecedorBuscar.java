@@ -179,10 +179,14 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
 
     @Override
     public void preencheFiltro() {
-        if(! txtNome.getText().isEmpty())
-            filtro.setNome(txtNome.getText());
-        if(! txtCnpj.getText().isEmpty())
-            filtro.setCnpj(txtCnpj.getText());
+         try {
+             if(! txtNome.getText().isEmpty())
+                    filtro.setNome(txtNome.getText());
+             if(! txtCnpj.getText().isEmpty())
+                    filtro.setCnpj(txtCnpj.getText());
+         } catch (RegraNegocioException ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
 }
 
     @Override

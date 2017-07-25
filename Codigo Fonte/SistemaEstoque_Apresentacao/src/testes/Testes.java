@@ -19,7 +19,7 @@ public class Testes {
     
         PessoaRepositorio pessoas = new PessoaDAO();
         
-        Pessoa pessoa1 = new Pessoa(0,"João Pimenta","234uy32u4","jpimenta","123456");
+        Pessoa pessoa1 = new Pessoa(0,"João Pimenta5","234uy32u4","jpimenta","123456");
         
        pessoas.Salvar(pessoa1);
        
