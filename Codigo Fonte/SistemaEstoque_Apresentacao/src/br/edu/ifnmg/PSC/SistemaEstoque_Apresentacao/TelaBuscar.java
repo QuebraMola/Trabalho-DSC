@@ -95,9 +95,11 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
     
     
     public void editar(){
+       
         int id = retornaIdSelecionado();
         
         filtro = repositorio.Abrir(id);
+        
         
           
         try {
@@ -114,6 +116,8 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         tela_editar.setRepositorio(repositorio);
         
         tela_editar.setEntidade(filtro);
+        
+        tela_editar.carregaCampos();
         
         this.getParent().add(tela_editar);
         

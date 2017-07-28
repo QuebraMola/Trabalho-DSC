@@ -129,7 +129,7 @@ public class PessoaEditar extends TelaEditar<Pessoa> {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         salvar();
- 
+        
  
     }//GEN-LAST:event_btnSalvarActionPerformed
 

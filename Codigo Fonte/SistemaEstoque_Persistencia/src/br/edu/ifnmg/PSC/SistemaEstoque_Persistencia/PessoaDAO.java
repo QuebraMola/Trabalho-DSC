@@ -96,8 +96,8 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
             Pessoa obj = new Pessoa();
             obj.setId(resultado.getInt("id"));
             obj.setNomeCompleto(resultado.getString("nomeCompleto"));
-            obj.setCpf(resultado.getString("cpf"));
             obj.setNomeUsuario(resultado.getString("nomeUsuario"));
+            obj.setCpf(resultado.getString("cpf"));
             //obj.setSenha(resultado.getString("senha"));
             
             return obj;
