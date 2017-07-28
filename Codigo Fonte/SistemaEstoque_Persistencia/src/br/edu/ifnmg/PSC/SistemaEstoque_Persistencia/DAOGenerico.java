@@ -134,7 +134,6 @@ public abstract class DAOGenerico <Q extends Entidade> implements Repositorio<Q>
     @Override
     public List<Q> Buscar(Q filtro) {
            
-        
            List<Q> lista = new ArrayList<>();
        
         try {
@@ -142,7 +141,7 @@ public abstract class DAOGenerico <Q extends Entidade> implements Repositorio<Q>
             if(filtro != null)
                 this.setBuscaFiltros(filtro);
             
-            
+          
              String sqlfinal = this.getConsultaBuscar();
           
             
@@ -158,7 +157,7 @@ public abstract class DAOGenerico <Q extends Entidade> implements Repositorio<Q>
                 lista.add(this.setDados(resultado) );
             
             this.where = "";
-            
+           
             return lista;
             
         } catch (SQLException ex) {

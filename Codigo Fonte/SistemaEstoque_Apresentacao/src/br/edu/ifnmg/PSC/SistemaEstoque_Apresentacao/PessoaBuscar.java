@@ -25,7 +25,8 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
     public PessoaBuscar(Repositorio<Pessoa> repositorio, Class tipo_tela) {
         super(repositorio, tipo_tela);
         initComponents();
-        filtro = new Pessoa();
+       
+       
     }
 
     /**
@@ -154,6 +155,7 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        filtro = new Pessoa(0,null,null,null,null);
         editar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -162,6 +164,7 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        filtro = new Pessoa(0,null,null,null,null); 
         buscar();
         
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -181,6 +184,7 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
 
     @Override
     public void preencheFiltro() {
+     
         try {
             if(! txtNomeCompleto.getText().isEmpty())
                 filtro.setNomeCompleto(txtNomeCompleto.getText());
@@ -200,16 +204,17 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
                
         modelo.addColumn("ID");
         modelo.addColumn("Nome Completo");
-        modelo.addColumn("cpf");
         modelo.addColumn("Nome de Usuário");
+        modelo.addColumn("cpf");
+        
         
        
         for(Pessoa s : listagem){
             Vector linha = new Vector();
             linha.add(s.getId());
             linha.add(s.getNomeCompleto());
-            linha.add(s.getCpf());
             linha.add(s.getNomeUsuario());
+            linha.add(s.getCpf());
             
             modelo.addRow(linha);
         }

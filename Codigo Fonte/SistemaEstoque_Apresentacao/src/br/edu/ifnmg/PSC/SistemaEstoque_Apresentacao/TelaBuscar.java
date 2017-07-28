@@ -34,8 +34,7 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         this.tipo_tela = tipo_tela;
     }
     
-    public void buscar() {
-        
+    public void buscar(){
         
         
         preencheFiltro();
@@ -43,7 +42,7 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         List<Q> listagem = repositorio.Buscar(filtro);
         
         preencheTabela(listagem);
-       
+         
         
     }
     
@@ -71,6 +70,7 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         tela_editar.setVisible(true);
         
         this.setVisible(false);
+
     }
    
     public void apagar(){
@@ -99,9 +99,30 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         
         filtro = repositorio.Abrir(id);
         
+          
+        try {
+            tela_editar = (TelaEditar<Q>) tipo_tela.newInstance();
+            
+        } catch (InstantiationException ex) {
+            Logger.getLogger(TelaBuscar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(TelaBuscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        tela_editar.setBuscar(this);
         
+        tela_editar.setRepositorio(repositorio);
+        
+        tela_editar.setEntidade(filtro);
+        
+        this.getParent().add(tela_editar);
+        
+        tela_editar.setVisible(true);
+        
+        this.setVisible(false);
     }
+        
+    
    
     
 }

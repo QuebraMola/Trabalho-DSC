@@ -29,12 +29,12 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
     
     @Override
     protected String getConsultaInsert() {
-           return "insert into pessoas(nomeCompleto,cpf,nomeUsuario,senha) values (?,?,?,?) ";
+           return "insert into pessoas(nomeCompleto,nomeUsuario,cpf,senha) values (?,?,?,?) ";
     }
 
     @Override
     protected String getConsultaUpdate() {
-            return "update pessoas set nomeCompleto=?, cpf=?, nomeUsuario=?, senha=? where id = ?";
+            return "update pessoas set nomeCompleto=?, nomeUsuario=?, cpf=?, senha=? where id = ?";
     }
 
     @Override
@@ -44,32 +44,32 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
 
     @Override
     protected String getConsultaAbrir() {
-            return "select id,nomeCompleto,cpf,nomeUsuario,senha from pessoas where id=?";
+            return "select id,nomeCompleto,nomeUsuario,cpf,senha from pessoas where id=?";
     }
 
     @Override
     protected String getConsultaBuscar() {
-            return "select id,nomeCompleto,cpf,nomeUsuario from pessoas";
+            return "select id,nomeCompleto,nomeUsuario,cpf from pessoas";
     }
     
 
     @Override
     protected void setBuscaFiltros(Pessoa filtro) {
-         if(filtro.getId() > 0)
+        if(filtro.getId() > 0)
             this.adicionarFiltro("id", filtro.getId());
         
         if(filtro.getNomeCompleto() != null && !filtro.getNomeCompleto().isEmpty())
             this.adicionarFiltro("nomeCompleto", filtro.getNomeCompleto());
         
-        if(filtro.getCpf() != null && !filtro.getCpf().isEmpty())
-            this.adicionarFiltro("cpf", filtro.getCpf());
+      //  if(filtro.getCpf() != null && !filtro.getCpf().isEmpty())
+       //     this.adicionarFiltro("cpf", filtro.getCpf());
         
         if(filtro.getNomeUsuario()!= null && !filtro.getNomeUsuario().isEmpty())
             this.adicionarFiltro("nomeUsuario", filtro.getNomeUsuario());
         
  
-        if(filtro.getSenha() != null && !filtro.getSenha().isEmpty())
-            this.adicionarFiltro("senha", filtro.getSenha());
+     //   if(filtro.getSenha() != null && !filtro.getSenha().isEmpty())
+      //      this.adicionarFiltro("senha", filtro.getSenha());
        }
 
     @Override

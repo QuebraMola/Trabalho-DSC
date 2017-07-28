@@ -26,7 +26,7 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
     public FornecedorBuscar(Repositorio<Fornecedor> repositorio, Class tipo_tela) {
         super(repositorio, tipo_tela);
         initComponents();
-        filtro = new Fornecedor();
+
     }
 
     /**
@@ -41,13 +41,13 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        txtCnpj = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBuscar = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         btnApagar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        txtCnpj = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Buscar Fornecedores");
@@ -55,8 +55,6 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
         jLabel1.setText("Nome:");
 
         jLabel2.setText("Cnpj:");
-
-        txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("12345678910"))));
 
         tblBuscar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,12 +110,12 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNome)
-                            .addComponent(txtCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)))
+                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+                            .addComponent(txtCnpj)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -142,7 +140,7 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
                     .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(btnNovo)
@@ -159,6 +157,7 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        filtro = new Fornecedor(0,null,null,null);
         buscar();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -224,7 +223,7 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBuscar;
-    private javax.swing.JFormattedTextField txtCnpj;
+    private javax.swing.JTextField txtCnpj;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }
