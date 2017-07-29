@@ -45,7 +45,7 @@ public class Fornecedor implements Entidade {
     }
 
     public void setTelefone(String telefone) throws RegraNegocioException {
-        if(telefone.contains("~[a-z]") || telefone.length() < 8)
+        if(telefone.contains("~[a-z]") || telefone.length() > 8)
             throw new RegraNegocioException("Informe um Telefone Válido");
         this.telefone = telefone;
     }

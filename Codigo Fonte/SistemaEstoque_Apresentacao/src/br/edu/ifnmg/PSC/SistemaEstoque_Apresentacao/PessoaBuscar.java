@@ -8,6 +8,7 @@ package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Pessoa;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Repositorio;
+import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -25,6 +26,7 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
     public PessoaBuscar(Repositorio<Pessoa> repositorio, Class tipo_tela) {
         super(repositorio, tipo_tela);
         initComponents();
+        this.getContentPane().setBackground(Color.LIGHT_GRAY);
        
        
     }
@@ -155,7 +157,6 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        filtro = new Pessoa(0,null,null,null,null);
         editar();
     }//GEN-LAST:event_btnEditarActionPerformed
 

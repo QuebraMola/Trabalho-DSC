@@ -33,6 +33,10 @@ public class Pessoa implements Entidade {
     public Pessoa() {
     }
 
+    public Pessoa(int i, Object object, Object object0, Object object1, Object object2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getCpf() {
         return cpf;
     }

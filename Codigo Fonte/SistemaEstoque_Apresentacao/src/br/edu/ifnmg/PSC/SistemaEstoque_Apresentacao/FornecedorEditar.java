@@ -120,7 +120,9 @@ public class FornecedorEditar extends TelaEditar<Fornecedor> {
     public void carregaCampos() {
         txtNome.setText(entidade.getNome());
         txtCnpj.setText(entidade.getCnpj());
-        txtTelefone.setText(entidade.getTelefone());}
+        txtTelefone.setText(entidade.getTelefone());
+    
+    }
 
     @Override
     public void carregaObjeto() throws RegraNegocioException {

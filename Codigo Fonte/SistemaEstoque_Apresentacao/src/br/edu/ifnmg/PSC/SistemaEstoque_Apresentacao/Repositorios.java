@@ -7,8 +7,10 @@ package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.FornecedorRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.PessoaRepositorio;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ProdutoRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.FornecedorDAO;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.PessoaDAO;
+import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.ProdutoDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,5 +49,20 @@ public class Repositorios {
             }
         return fornecedorDAO;
     }
+    
+      static ProdutoRepositorio produtoDAO = null;
+    
+    public static ProdutoRepositorio getProdutoRepositorio(){
+        if(produtoDAO == null)
+            try {
+                produtoDAO = new ProdutoDAO();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Repositorios.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Repositorios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return produtoDAO;
+    }
+    
     
 }
