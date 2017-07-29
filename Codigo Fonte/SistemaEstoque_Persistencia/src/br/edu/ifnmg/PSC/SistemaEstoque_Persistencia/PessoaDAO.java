@@ -61,16 +61,13 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
         if(filtro.getNomeCompleto() != null && !filtro.getNomeCompleto().isEmpty())
             this.adicionarFiltro("nomeCompleto", filtro.getNomeCompleto());
         
-      //  if(filtro.getCpf() != null && !filtro.getCpf().isEmpty())
-       //     this.adicionarFiltro("cpf", filtro.getCpf());
-        
         if(filtro.getNomeUsuario()!= null && !filtro.getNomeUsuario().isEmpty())
             this.adicionarFiltro("nomeUsuario", filtro.getNomeUsuario());
         
- 
-     //   if(filtro.getSenha() != null && !filtro.getSenha().isEmpty())
-      //      this.adicionarFiltro("senha", filtro.getSenha());
-       }
+        if(filtro.getSenha() != null && !filtro.getSenha().isEmpty())
+            this.adicionarFiltro("senha", filtro.getSenha());
+        
+    }
 
     @Override
     protected void setParametros(PreparedStatement sql, Pessoa obj) {
@@ -98,7 +95,7 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
             obj.setNomeCompleto(resultado.getString("nomeCompleto"));
             obj.setNomeUsuario(resultado.getString("nomeUsuario"));
             obj.setCpf(resultado.getString("cpf"));
-            //obj.setSenha(resultado.getString("senha"));
+           // obj.setSenha(resultado.getString("senha"));
             
             return obj;
             

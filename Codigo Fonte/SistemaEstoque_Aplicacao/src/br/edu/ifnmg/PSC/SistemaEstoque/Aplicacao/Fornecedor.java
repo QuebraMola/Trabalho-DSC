@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao;
 
+import static br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Validacoes.validarCnpj;
 import java.util.Objects;
 
 /**
@@ -43,7 +44,9 @@ public class Fornecedor implements Entidade {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(String telefone) throws RegraNegocioException {
+        if(telefone.contains("~[a-z]") || telefone.length() < 8)
+            throw new RegraNegocioException("Informe um Telefone Válido");
         this.telefone = telefone;
     }
 
@@ -51,7 +54,9 @@ public class Fornecedor implements Entidade {
         return cnpj;
     }
 
-    public void setCnpj(String cnpj) {
+    public void setCnpj(String cnpj) throws RegraNegocioException {
+        if(!validarCnpj(cnpj))
+            throw new RegraNegocioException("Informe um Cnpj válido!");
         this.cnpj = cnpj;
     }
 

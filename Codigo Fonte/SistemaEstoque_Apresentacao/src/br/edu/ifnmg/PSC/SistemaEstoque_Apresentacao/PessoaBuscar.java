@@ -171,6 +171,9 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         apagar();
+        filtro = new Pessoa(0,null,null,null,null); 
+        buscar();
+               
     }//GEN-LAST:event_btnApagarActionPerformed
 
     

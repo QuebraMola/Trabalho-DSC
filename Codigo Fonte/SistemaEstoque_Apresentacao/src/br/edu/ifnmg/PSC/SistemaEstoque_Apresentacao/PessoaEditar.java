@@ -171,9 +171,12 @@ public class PessoaEditar extends TelaEditar<Pessoa> {
 
     @Override
     public boolean verificarCamposObrigatorios() {
-        return txtNome.getText().length() > 5 &&
-               txtNomeUsuario.getText().length() > 3 &&
-               txtSenha.getPassword().length > 3;
+        if (txtNome.getText().length() ==0 ||
+               txtNomeUsuario.getText().length() ==0 ||
+               txtSenha.getPassword().length ==0)
+            return false;
+        return true;
+                
                 
     }
 }

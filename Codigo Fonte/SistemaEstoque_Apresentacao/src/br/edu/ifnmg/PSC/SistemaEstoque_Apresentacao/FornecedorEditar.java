@@ -132,8 +132,9 @@ public class FornecedorEditar extends TelaEditar<Fornecedor> {
 
     @Override
     public boolean verificarCamposObrigatorios() {
-        return txtNome.getText().length() > 5 &&
-               txtTelefone.getText().length() > 7;
+        if(txtNome.getText().length() ==0 || txtTelefone.getText().length() == 0 || txtCnpj.getText().length() ==0)
+            return false;
+        return true;
     }
 
 

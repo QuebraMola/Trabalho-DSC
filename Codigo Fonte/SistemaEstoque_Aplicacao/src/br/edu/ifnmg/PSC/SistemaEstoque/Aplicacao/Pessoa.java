@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao;
 
+import static br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Validacoes.validarCpf;
 import java.util.Objects;
 
 /**
@@ -36,7 +37,9 @@ public class Pessoa implements Entidade {
         return cpf;
     }
 
-    public void setCpf(String cpf){     
+    public void setCpf(String cpf) throws RegraNegocioException{     
+        if(!validarCpf(cpf))
+                throw new RegraNegocioException("Informe um Cpf Válido!");
         this.cpf = cpf;
     }
     
@@ -134,11 +137,10 @@ public class Pessoa implements Entidade {
             return false;
         }*/
         return true;
-    }
-
-    
+    }    
    
-  
+    
+
 }
 
 
