@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -82,13 +84,40 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
 
     @Override
     protected void setParametros(PreparedStatement sql, Produto obj) {
-        
+       try {
+            
+            sql.setString(1, obj.getDescricao());
+            sql.setInt(2, obj.getFornecedor().getId());
+            sql.setFloat(3,obj.getValorCompra());
+            sql.setInt(4, obj.getPorcentagemLucro());
+            sql.setInt(5,obj.getQtd());
+            sql.setDate(6, new java.sql.Date(obj.getValidade().getTime()));
+            sql.setFloat(7, obj.getValorFinal());
+            
+            if(obj.getId() > 0)
+                sql.setInt(8, obj.getId());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     FornecedorDAO fornecedor;
     
     @Override
     protected Produto setDados(ResultSet resultado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+
+            Produto obj = new Produto();
+            obj.setId(resultado.getInt("id"));
+            obj.setDescricao(resultado.getString("nomedescricao"));
+            obj.setFornecedor( fornecedor.Abrir( resultado.getInt("fornecedor") ) );
+            
+            return obj;
+            
+        } catch (Exception ex) {
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

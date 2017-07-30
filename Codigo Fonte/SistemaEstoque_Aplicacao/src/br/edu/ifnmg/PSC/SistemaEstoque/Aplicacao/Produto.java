@@ -33,6 +33,10 @@ public class Produto implements Entidade{
         this.validade = validade;
     }
 
+    public Produto() {
+        
+    }
+
     @Override
     public void setId(int id) {
         this.id=id;
