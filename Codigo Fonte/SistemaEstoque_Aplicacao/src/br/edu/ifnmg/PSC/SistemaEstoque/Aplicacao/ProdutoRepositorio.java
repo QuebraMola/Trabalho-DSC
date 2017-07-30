@@ -9,7 +9,6 @@ package br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao;
  *
  * @author junior-ormundo
  */
-public interface ProdutoRepositorio extends Repositorio<Produto>{
- 
+public interface ProdutoRepositorio extends Repositorio<Produto> {
     
 }
