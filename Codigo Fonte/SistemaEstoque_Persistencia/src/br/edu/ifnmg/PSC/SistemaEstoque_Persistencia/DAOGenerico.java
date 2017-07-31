@@ -8,10 +8,12 @@ package br.edu.ifnmg.PSC.SistemaEstoque_Persistencia;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Entidade;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Repositorio;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -131,11 +133,13 @@ public abstract class DAOGenerico <Q extends Entidade> implements Repositorio<Q>
         return this;
     }
     
-    protected DAOGenerico<Q> adicionarFiltro(String campo, float valor){
+    
+    
+    protected DAOGenerico<Q> adicionarFiltro(String campo, double valor){
         if(where.length() > 0)
             where += " and ";
         
-        where += campo + " = "+ Float.toString(valor);
+        where += campo + " = "+ Double.toString(valor);
         
         return this;
     }

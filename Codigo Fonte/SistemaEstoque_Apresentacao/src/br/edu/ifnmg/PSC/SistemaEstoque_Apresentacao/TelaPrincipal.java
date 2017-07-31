@@ -39,6 +39,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         mnuPessoa = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         mnuFornecedor = new javax.swing.JMenuItem();
+        mnuProduto = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -64,6 +65,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         mnuPessoa.add(mnuFornecedor);
+
+        mnuProduto.setText("Produtos");
+        mnuProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuProdutoActionPerformed(evt);
+            }
+        });
+        mnuPessoa.add(mnuProduto);
 
         jMenuBar1.add(mnuPessoa);
 
@@ -95,6 +104,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
       tela.setVisible(true);
     
     }//GEN-LAST:event_mnuFornecedorActionPerformed
+
+    private void mnuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProdutoActionPerformed
+      ProdutoBuscar tela = new ProdutoBuscar(Repositorios.getProdutoRepositorio(),ProdutoEditar.class);
+      this.add(tela);
+      tela.setVisible(true);
+    }//GEN-LAST:event_mnuProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,5 +153,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem mnuFornecedor;
     private javax.swing.JMenu mnuPessoa;
+    private javax.swing.JMenuItem mnuProduto;
     // End of variables declaration//GEN-END:variables
 }

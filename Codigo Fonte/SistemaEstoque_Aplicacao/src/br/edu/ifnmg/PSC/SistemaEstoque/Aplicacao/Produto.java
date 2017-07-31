@@ -17,13 +17,13 @@ public class Produto implements Entidade{
     private int id;
     private String descricao;
     private Fornecedor fornecedor;
-    private float valorCompra;
+    private double valorCompra;
     private int porcentagemLucro;
     private int qtd;
     private Date validade;
-    private float valorFinal;
-    
-    public Produto(int id, String descricao, Fornecedor fornecedor, float valorCompra, int porcentagemLucro, int qtd, Date validade) {
+    private double valorFinal;
+
+    public Produto(int id, String descricao, Fornecedor fornecedor, double valorCompra, int porcentagemLucro, int qtd, Date validade, double valorFinal) {
         this.id = id;
         this.descricao = descricao;
         this.fornecedor = fornecedor;
@@ -31,7 +31,10 @@ public class Produto implements Entidade{
         this.porcentagemLucro = porcentagemLucro;
         this.qtd = qtd;
         this.validade = validade;
+        this.valorFinal = valorFinal;
     }
+    
+    
 
     public Produto() {
         
@@ -55,11 +58,11 @@ public class Produto implements Entidade{
         this.descricao = descricao;
     }
 
-    public float getValorCompra() {
+    public double getValorCompra() {
         return valorCompra;
     }
 
-    public void setValorCompra(float valorCompra) {
+    public void setValorCompra(double valorCompra) {
         this.valorCompra = valorCompra;
     }
 
@@ -86,8 +89,8 @@ public class Produto implements Entidade{
     public void setValidade(Date validade) {
         this.validade = validade;
     }
-    public void setValorFinal(float valorCompra, int porcentagemLucro){
-        this.valorFinal = valorCompra+(valorCompra*porcentagemLucro/100);
+    public void setValorFinal(double valorCompra, int porcentagemLucro){
+        this.valorFinal = calculaValorFinal(valorCompra,porcentagemLucro);
     
     }
 
@@ -95,23 +98,25 @@ public class Produto implements Entidade{
         return fornecedor;
     }
 
-    public float getValorFinal() {
+    public double getValorFinal() {
         return valorFinal;
     }
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }
-   
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 43 * hash + this.id;
-        hash = 43 * hash + Objects.hashCode(this.descricao);
-        hash = 43 * hash + Float.floatToIntBits(this.valorCompra);
-        hash = 43 * hash + this.porcentagemLucro;
-        hash = 43 * hash + this.qtd;
-        hash = 43 * hash + Objects.hashCode(this.validade);
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.descricao);
+        hash = 89 * hash + Objects.hashCode(this.fornecedor);
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.valorCompra) ^ (Double.doubleToLongBits(this.valorCompra) >>> 32));
+        hash = 89 * hash + this.porcentagemLucro;
+        hash = 89 * hash + this.qtd;
+        hash = 89 * hash + Objects.hashCode(this.validade);
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.valorFinal) ^ (Double.doubleToLongBits(this.valorFinal) >>> 32));
         return hash;
     }
 
@@ -130,7 +135,7 @@ public class Produto implements Entidade{
         if (this.id != other.id) {
             return false;
         }
-        if (Float.floatToIntBits(this.valorCompra) != Float.floatToIntBits(other.valorCompra)) {
+        if (Double.doubleToLongBits(this.valorCompra) != Double.doubleToLongBits(other.valorCompra)) {
             return false;
         }
         if (this.porcentagemLucro != other.porcentagemLucro) {
@@ -139,7 +144,13 @@ public class Produto implements Entidade{
         if (this.qtd != other.qtd) {
             return false;
         }
+        if (Double.doubleToLongBits(this.valorFinal) != Double.doubleToLongBits(other.valorFinal)) {
+            return false;
+        }
         if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.fornecedor, other.fornecedor)) {
             return false;
         }
         if (!Objects.equals(this.validade, other.validade)) {
@@ -147,5 +158,10 @@ public class Produto implements Entidade{
         }
         return true;
     }
+
+    private double calculaValorFinal(double valorCompra, int porcentagemLucro) {
+        return valorCompra+(valorCompra*porcentagemLucro/100);
+    }
+   
     
 }

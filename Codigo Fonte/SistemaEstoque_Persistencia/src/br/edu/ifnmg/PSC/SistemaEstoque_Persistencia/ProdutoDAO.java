@@ -10,6 +10,7 @@ import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ProdutoRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,13 +73,9 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
         if(filtro.getQtd() > 0 )
             this.adicionarFiltro("qtd", filtro.getQtd());
         
-         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-         
-         this.where = "validade" + df.format(filtro.getValidade() != null) ;
-         
-        if(filtro.getValorFinal() > 0 )
-            this.adicionarFiltro("valorFinal", filtro.getValorFinal());
-     
+        if(filtro.getValidade()!= null) 
+                this.adicionarFiltro("validade",filtro.getValidade().toString());
+        
       
     }
 
@@ -88,17 +85,17 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
             
             sql.setString(1, obj.getDescricao());
             sql.setInt(2, obj.getFornecedor().getId());
-            sql.setFloat(3,obj.getValorCompra());
+            sql.setDouble(3,obj.getValorCompra());
             sql.setInt(4, obj.getPorcentagemLucro());
             sql.setInt(5,obj.getQtd());
             sql.setDate(6, new java.sql.Date(obj.getValidade().getTime()));
-            sql.setFloat(7, obj.getValorFinal());
+            sql.setDouble(7, obj.getValorFinal());
             
             if(obj.getId() > 0)
                 sql.setInt(8, obj.getId());
             
         } catch (SQLException ex) {
-            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -110,13 +107,18 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
 
             Produto obj = new Produto();
             obj.setId(resultado.getInt("id"));
-            obj.setDescricao(resultado.getString("nomedescricao"));
+            obj.setDescricao(resultado.getString("descricao"));
             obj.setFornecedor( fornecedor.Abrir( resultado.getInt("fornecedor") ) );
+            obj.setValorCompra(resultado.getDouble("valorCompra"));
+            obj.setPorcentagemLucro(resultado.getInt("porcentagemLucro"));
+            obj.setQtd(resultado.getInt("qtd"));
+            obj.setValidade(resultado.getTime("validade"));
+            obj.setValorFinal(resultado.getDouble("valorCompra"),resultado.getInt("porcentagemLucro"));
             
             return obj;
             
         } catch (Exception ex) {
-            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

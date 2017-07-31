@@ -97,7 +97,7 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
             return obj;
             
         } catch (Exception ex) {
-            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
