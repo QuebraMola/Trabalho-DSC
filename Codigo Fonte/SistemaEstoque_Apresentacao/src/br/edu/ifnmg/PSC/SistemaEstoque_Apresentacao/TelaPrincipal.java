@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 
 /**
@@ -20,16 +21,16 @@ import javax.swing.ImageIcon;
  * @author junior-ormundo
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-        
+      
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
        
         initComponents();
-        
+         
         Color minhaCor = new Color(176, 226, 255);
-
+        
         this.getContentPane().setBackground(minhaCor); 
         
                 
@@ -60,6 +61,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciamento de Estoque Quebra-Mola");
         setBackground(new java.awt.Color(99, 184, 255));
+        setExtendedState(6);
 
         jMenuBar1.setBackground(new java.awt.Color(69, 59, 55));
 
@@ -169,6 +171,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+               
                 new TelaPrincipal().setVisible(true);
              }
         });
