@@ -5,8 +5,8 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque_Persistencia;
 
-import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Pessoa;
-import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.PessoaRepositorio;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Usuario;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.UsuarioRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,9 +17,9 @@ import java.util.logging.Logger;
  *
  * @author junior-ormundo
  */
-public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio {
-
-    public PessoaDAO() throws ClassNotFoundException, SQLException {
+public class UsuarioDAO extends DAOGenerico<Usuario> implements UsuarioRepositorio {
+    
+    public UsuarioDAO() throws ClassNotFoundException, SQLException {
         super();
     
     }
@@ -29,32 +29,32 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
     
     @Override
     protected String getConsultaInsert() {
-           return "insert into pessoas(nomeCompleto,nomeUsuario,cpf,senha) values (?,?,?,?) ";
+           return "insert into usuarios(nomeCompleto,nomeUsuario,cpf,senha) values (?,?,?,?) ";
     }
 
     @Override
     protected String getConsultaUpdate() {
-            return "update pessoas set nomeCompleto=?, nomeUsuario=?, cpf=?, senha=? where id = ?";
+            return "update usuarios set nomeCompleto=?, nomeUsuario=?, cpf=?, senha=? where id = ?";
     }
 
     @Override
     protected String getConsultaDelete() {
-            return "delete from pessoas where id=? ";
+            return "delete from usuarios where id=? ";
     }
 
     @Override
     protected String getConsultaAbrir() {
-            return "select id,nomeCompleto,nomeUsuario,cpf,senha from pessoas where id=?";
+            return "select id,nomeCompleto,nomeUsuario,cpf,senha from usuarios where id=?";
     }
 
     @Override
     protected String getConsultaBuscar() {
-            return "select id,nomeCompleto,nomeUsuario,cpf from pessoas";
+            return "select id,nomeCompleto,nomeUsuario,cpf from usuarios";
     }
     
 
     @Override
-    protected void setBuscaFiltros(Pessoa filtro) {
+    protected void setBuscaFiltros(Usuario filtro) {
         if(filtro.getId() > 0)
             this.adicionarFiltro("id", filtro.getId());
         
@@ -70,7 +70,7 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
     }
 
     @Override
-    protected void setParametros(PreparedStatement sql, Pessoa obj) {
+    protected void setParametros(PreparedStatement sql, Usuario obj) {
         try {
             
             sql.setString(1, obj.getNomeCompleto());
@@ -82,15 +82,15 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
                 sql.setInt(5, obj.getId());
             
         } catch (SQLException ex) {
-            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    protected Pessoa setDados(ResultSet resultado) {
+    protected Usuario setDados(ResultSet resultado) {
         try {
 
-            Pessoa obj = new Pessoa();
+            Usuario obj = new Usuario();
             obj.setId(resultado.getInt("id"));
             obj.setNomeCompleto(resultado.getString("nomeCompleto"));
             obj.setNomeUsuario(resultado.getString("nomeUsuario"));
@@ -100,7 +100,7 @@ public class PessoaDAO extends DAOGenerico<Pessoa> implements PessoaRepositorio 
             return obj;
             
         } catch (Exception ex) {
-            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

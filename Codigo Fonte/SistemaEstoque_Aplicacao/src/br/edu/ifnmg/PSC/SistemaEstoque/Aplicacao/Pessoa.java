@@ -5,108 +5,61 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao;
 
-import static br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Validacoes.validarCpf;
 import java.util.Objects;
 
 /**
  *
  * @author junior-ormundo
  */
-public class Pessoa implements Entidade {
+public abstract class Pessoa implements Entidade {
     
-   private int id;
-   private String nomeCompleto;
-   private String nomeUsuario;
-   private String cpf;
-   private String senha;
-/*   private tipoPessoa tipo;*/
+    private int id;
+    private String nomeCompleto;
+    private String cpf;
 
-    public Pessoa(int id, String nomeCompleto, String cpf, String nomeUsuario, String senha) {
+    public Pessoa(int id, String nomeCompleto, String cpf) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.cpf = cpf;
-        this.nomeUsuario = nomeUsuario;
-        this.senha = senha;
-      /*  this.tipo = tipo;*/
     }
 
     public Pessoa() {
     }
 
-    public Pessoa(int i, Object object, Object object0, Object object1, Object object2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) throws RegraNegocioException{     
-        if(!validarCpf(cpf))
-                throw new RegraNegocioException("Informe um Cpf Válido!");
-        this.cpf = cpf;
-    }
     
+    
+    @Override
+    public int getId() {
+        return id;
+    }
 
     @Override
     public void setId(int id) {
         this.id = id;
     }
 
-    @Override
-    public int getId() {
-        return id;
-    }
- 
-
     public String getNomeCompleto() {
         return nomeCompleto;
     }
 
-    public void setNomeCompleto(String nomeCompleto) throws RegraNegocioException {
-        if(nomeCompleto.length()< 5)
-               throw new RegraNegocioException("O Nome Completo deve ter mais de 5 caracteres!");        
+    public void setNomeCompleto(String nomeCompleto) {
         this.nomeCompleto = nomeCompleto;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-    
-    
-    public void setNomeUsuario(String nomeUsuario) throws RegraNegocioException {
-        if(nomeUsuario.length()< 3)
-               throw new RegraNegocioException("O Nome de Usuario deve ter mais de 3 caracteres!");        
-         this.nomeUsuario=nomeUsuario;
-       }
-
-    public String getSenha() {
-        return senha;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setSenha(String senha) throws RegraNegocioException {
-        if(senha.length()< 3)
-               throw new RegraNegocioException("A Senha deve ter mais de 3 caracteres!");        
-        this.senha = senha;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
-
-   /* public tipoPessoa getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(tipoPessoa tipo) {
-        this.tipo = tipo;
-    }*/
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.nomeCompleto);
-        hash = 53 * hash + Objects.hashCode(this.nomeUsuario);
-        hash = 53 * hash + Objects.hashCode(this.cpf);
-        hash = 53 * hash + Objects.hashCode(this.senha);
-    //    hash = 53 * hash + Objects.hashCode(this.tipo);
+        int hash = 7;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.nomeCompleto);
+        hash = 79 * hash + Objects.hashCode(this.cpf);
         return hash;
     }
 
@@ -128,23 +81,12 @@ public class Pessoa implements Entidade {
         if (!Objects.equals(this.nomeCompleto, other.nomeCompleto)) {
             return false;
         }
-        if (!Objects.equals(this.nomeUsuario, other.nomeUsuario)) {
-            return false;
-        }
         if (!Objects.equals(this.cpf, other.cpf)) {
             return false;
         }
-        if (!Objects.equals(this.senha, other.senha)) {
-            return false;
-        }
-     /*   if (this.tipo != other.tipo) {
-            return false;
-        }*/
         return true;
-    }    
-   
+    }
     
-
+    
+    
 }
-
-

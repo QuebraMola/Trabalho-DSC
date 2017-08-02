@@ -6,9 +6,9 @@
 package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Fornecedor;
-import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Pessoa;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Repositorio;
+import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -26,6 +26,9 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
     public FornecedorBuscar(Repositorio<Fornecedor> repositorio, Class tipo_tela) {
         super(repositorio, tipo_tela);
         initComponents();
+         Color minhaCor = new Color(176, 226, 255);
+
+        this.getContentPane().setBackground(minhaCor); 
 
     }
 
@@ -165,6 +168,8 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         apagar();
+        filtro = new Fornecedor(0,null,null,null);
+        buscar();
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed

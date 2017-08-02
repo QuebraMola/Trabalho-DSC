@@ -9,8 +9,6 @@ package br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao;
  *
  * @author junior-ormundo
  */
-public interface PessoaRepositorio extends Repositorio<Pessoa>{
- 
+public class Venda {
     
-  
 }

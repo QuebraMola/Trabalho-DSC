@@ -6,6 +6,13 @@
 package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -13,15 +20,19 @@ import java.awt.Color;
  * @author junior-ormundo
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-
+        
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
+       
         initComponents();
-        this.getContentPane().setBackground(Color.LIGHT_GRAY);
         
-            
+        Color minhaCor = new Color(176, 226, 255);
+
+        this.getContentPane().setBackground(minhaCor); 
+        
+                
     }
 
     /**
@@ -38,8 +49,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuPessoa = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        mnuFornecedor = new javax.swing.JMenuItem();
-        mnuProduto = new javax.swing.JMenuItem();
+        mnuClientes = new javax.swing.JMenuItem();
+        mnuProdutos = new javax.swing.JMenuItem();
+        mnuFornecedores = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -47,10 +59,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciamento de Estoque Quebra-Mola");
+        setBackground(new java.awt.Color(99, 184, 255));
+
+        jMenuBar1.setBackground(new java.awt.Color(69, 59, 55));
 
         mnuPessoa.setText("Cadastros");
 
-        jMenuItem3.setText("Pessoas");
+        jMenuItem3.setText("Usuarios");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -58,21 +73,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         mnuPessoa.add(jMenuItem3);
 
-        mnuFornecedor.setText("Fornecedores");
-        mnuFornecedor.addActionListener(new java.awt.event.ActionListener() {
+        mnuClientes.setText("Clientes");
+        mnuClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuFornecedorActionPerformed(evt);
+                mnuClientesActionPerformed(evt);
             }
         });
-        mnuPessoa.add(mnuFornecedor);
+        mnuPessoa.add(mnuClientes);
 
-        mnuProduto.setText("Produtos");
-        mnuProduto.addActionListener(new java.awt.event.ActionListener() {
+        mnuProdutos.setText("Produtos");
+        mnuProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuProdutoActionPerformed(evt);
+                mnuProdutosActionPerformed(evt);
             }
         });
-        mnuPessoa.add(mnuProduto);
+        mnuPessoa.add(mnuProdutos);
+
+        mnuFornecedores.setText("Fornecedores");
+        mnuFornecedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuFornecedoresActionPerformed(evt);
+            }
+        });
+        mnuPessoa.add(mnuFornecedores);
 
         jMenuBar1.add(mnuPessoa);
 
@@ -93,23 +116,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        PessoaBuscar tela = new PessoaBuscar(Repositorios.getPessoaRepositorio(),PessoaEditar.class);
+        UsuarioBuscar tela = new UsuarioBuscar(Repositorios.getUsuarioRepositorio(),UsuarioEditar.class);
         this.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void mnuFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFornecedorActionPerformed
-      FornecedorBuscar tela = new FornecedorBuscar(Repositorios.getFornecedorRepositorio(),FornecedorEditar.class);
-      this.add(tela);
-      tela.setVisible(true);
-    
-    }//GEN-LAST:event_mnuFornecedorActionPerformed
+    private void mnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuClientesActionPerformed
+        ClienteBuscar tela = new ClienteBuscar(Repositorios.getClienteRepositorio(),ClienteEditar.class);
+        this.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_mnuClientesActionPerformed
 
-    private void mnuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProdutoActionPerformed
-      ProdutoBuscar tela = new ProdutoBuscar(Repositorios.getProdutoRepositorio(),ProdutoEditar.class);
-      this.add(tela);
-      tela.setVisible(true);
-    }//GEN-LAST:event_mnuProdutoActionPerformed
+    private void mnuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProdutosActionPerformed
+        ProdutoBuscar tela = new ProdutoBuscar(Repositorios.getProdutoRepositorio(),ProdutoEditar.class);
+        this.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_mnuProdutosActionPerformed
+
+    private void mnuFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFornecedoresActionPerformed
+        FornecedorBuscar tela = new FornecedorBuscar(Repositorios.getFornecedorRepositorio(),FornecedorEditar.class);
+        this.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_mnuFornecedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,8 +179,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem mnuFornecedor;
+    private javax.swing.JMenuItem mnuClientes;
+    private javax.swing.JMenuItem mnuFornecedores;
     private javax.swing.JMenu mnuPessoa;
-    private javax.swing.JMenuItem mnuProduto;
+    private javax.swing.JMenuItem mnuProdutos;
     // End of variables declaration//GEN-END:variables
 }

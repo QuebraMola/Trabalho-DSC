@@ -7,6 +7,7 @@ package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Fornecedor;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
+import java.awt.Color;
 
 /**
  *
@@ -19,6 +20,9 @@ public class FornecedorEditar extends TelaEditar<Fornecedor> {
      */
     public FornecedorEditar() {
         initComponents();
+         Color minhaCor = new Color(176, 226, 255);
+
+        this.getContentPane().setBackground(minhaCor); 
     }
 
     /**

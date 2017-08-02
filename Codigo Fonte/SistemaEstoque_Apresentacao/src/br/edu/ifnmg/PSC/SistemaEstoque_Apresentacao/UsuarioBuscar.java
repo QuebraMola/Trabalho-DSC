@@ -5,9 +5,9 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
-import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Pessoa;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Repositorio;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Usuario;
 import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
@@ -18,15 +18,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author junior-ormundo
  */
-public class PessoaBuscar extends TelaBuscar<Pessoa> {
+public class UsuarioBuscar extends TelaBuscar<Usuario> {
 
     /**
      * Creates new form PessoaBuscar
      */
-    public PessoaBuscar(Repositorio<Pessoa> repositorio, Class tipo_tela) {
+    public UsuarioBuscar(Repositorio<Usuario> repositorio, Class tipo_tela) {
         super(repositorio, tipo_tela);
         initComponents();
-        this.getContentPane().setBackground(Color.LIGHT_GRAY);
+       Color minhaCor = new Color(176, 226, 255);
+
+        this.getContentPane().setBackground(minhaCor); 
        
        
     }
@@ -165,14 +167,14 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        filtro = new Pessoa(0,null,null,null,null); 
+        filtro = new Usuario(0,null,null,null,null); 
         buscar();
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         apagar();
-        filtro = new Pessoa(0,null,null,null,null); 
+        filtro = new Usuario(0,null,null,null,null); 
         buscar();
                
     }//GEN-LAST:event_btnApagarActionPerformed
@@ -201,7 +203,7 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
     }
 
     @Override
-    public void preencheTabela(List<Pessoa> listagem) {
+    public void preencheTabela(List<Usuario> listagem) {
               
         
         DefaultTableModel modelo = new DefaultTableModel();
@@ -212,7 +214,7 @@ public class PessoaBuscar extends TelaBuscar<Pessoa> {
         modelo.addColumn("cpf");
         
        
-        for(Pessoa s : listagem){
+        for(Usuario s : listagem){
             Vector linha = new Vector();
             linha.add(s.getId());
             linha.add(s.getNomeCompleto());

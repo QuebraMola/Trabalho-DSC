@@ -8,8 +8,16 @@ package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Produto;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Repositorio;
+import java.awt.Color;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,12 +27,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ProdutoBuscar extends TelaBuscar<Produto> {
 
+     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    
     /**
      * Creates new form ProdutoBuscar
      */
     public ProdutoBuscar(Repositorio<Produto> repositorio, Class tipo_tela) {
         super(repositorio, tipo_tela);
         initComponents();
+        
+         Color minhaCor = new Color(176, 226, 255);
+
+        this.getContentPane().setBackground(minhaCor); 
+        
+        
     }
 
     /**
@@ -43,10 +59,8 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
         btnApagar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
-        txtCodigo = new javax.swing.JFormattedTextField();
         spnQtd = new javax.swing.JSpinner();
 
         setClosable(true);
@@ -95,11 +109,7 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
 
         jLabel1.setText("Descrição:");
 
-        jLabel2.setText("Codigo:");
-
         jLabel3.setText("Quantidade:");
-
-        txtCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,13 +128,11 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(spnQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
@@ -132,19 +140,15 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(spnQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -169,6 +173,8 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         apagar();
+        filtro = new Produto(0,null,null,0,0,0,null,0);
+        buscar();
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -182,12 +188,10 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner spnQtd;
     private javax.swing.JTable tblBuscar;
-    private javax.swing.JFormattedTextField txtCodigo;
     private javax.swing.JTextField txtDescricao;
     // End of variables declaration//GEN-END:variables
 
@@ -202,9 +206,7 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
     public void preencheFiltro() {
         if(! txtDescricao.getText().isEmpty())
             filtro.setDescricao(txtDescricao.getText());
-     //   if(Integer.parseInt(txtCodigo.getValue().toString()) < 0)
-       //     filtro.setId(Integer.parseInt(txtCodigo.getValue().toString()));
-        if(Integer.parseInt(spnQtd.getValue().toString()) < 0)
+        if(Integer.parseInt(spnQtd.getValue().toString()) > 0)
             filtro.setQtd(Integer.parseInt(spnQtd.getValue().toString()));
     }
 
@@ -224,17 +226,18 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
         
        
         for(Produto s : listagem){
+           
+                   
             Vector linha = new Vector();
+            
             linha.add(s.getId());
             linha.add(s.getDescricao());
             linha.add(s.getFornecedor().getNome());
             linha.add(s.getValorCompra());
             linha.add(s.getPorcentagemLucro());
             linha.add(s.getQtd());
-            linha.add(s.getValidade());
+            linha.add(df.format(s.getValidade()));
             linha.add(s.getValorFinal());
-            
-            
             modelo.addRow(linha);
         }
         

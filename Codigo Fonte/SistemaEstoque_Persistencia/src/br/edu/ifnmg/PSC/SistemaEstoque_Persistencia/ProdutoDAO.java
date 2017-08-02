@@ -10,7 +10,6 @@ import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ProdutoRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +29,7 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
 
     @Override
     protected String getConsultaInsert() {
-         return "insert into produtos(descricao,fornecedor,valorCompra,porcentagemLucro,qtd,validade,valorFinal) values (?,?,?,?,?,?) ";
+         return "insert into produtos(descricao,fornecedor,valorCompra,porcentagemLucro,qtd,validade,valorFinal) values (?,?,?,?,?,?,?) ";
     }
 
     @Override
@@ -73,9 +72,10 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
         if(filtro.getQtd() > 0 )
             this.adicionarFiltro("qtd", filtro.getQtd());
         
-        if(filtro.getValidade()!= null) 
-                this.adicionarFiltro("validade",filtro.getValidade().toString());
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         
+        if(filtro.getValidade()!= null) 
+            this.adicionarFiltro("validade",filtro.getValidade().getTime()); 
       
     }
 

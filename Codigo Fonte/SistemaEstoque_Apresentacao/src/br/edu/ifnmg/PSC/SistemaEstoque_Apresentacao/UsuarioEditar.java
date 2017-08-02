@@ -7,19 +7,25 @@ package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Pessoa;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Usuario;
+import java.awt.Color;
 
 /**
  *
  * @author junior-ormundo
  */
-public class PessoaEditar extends TelaEditar<Pessoa> {
+public class UsuarioEditar extends TelaEditar<Usuario> {
 
+    
     /**
      * Creates new form PessoaEditar
      */
     
-    public PessoaEditar() {
+    public UsuarioEditar() {
         initComponents();
+         Color minhaCor = new Color(176, 226, 255);
+
+        this.getContentPane().setBackground(minhaCor); 
     }
 
     /**

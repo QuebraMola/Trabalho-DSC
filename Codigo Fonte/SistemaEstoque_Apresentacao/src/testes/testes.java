@@ -36,7 +36,7 @@ public class testes{
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             try{
                   Produto produto2 = new Produto();
-                  produto2.setId(0);
+                  produto2.setId(9);
                   produto2.setDescricao("ProdutoTeste3");
                   produto2.setPorcentagemLucro(10);
                   produto2.setValorCompra(1200);
