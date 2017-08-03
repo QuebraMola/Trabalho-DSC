@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -213,10 +215,14 @@ public class ClienteBuscar extends TelaBuscar<Cliente> {
     @Override
     public void preencheFiltro() {
         
-        if(! txtNome.getText().isEmpty())
-            filtro.setNomeCompleto(txtNome.getText());
-        if(! txtEndereco.getText().isEmpty())
-            filtro.setEndereco(txtEndereco.getText());
+        try {
+            if(! txtNome.getText().isEmpty())
+                filtro.setNomeCompleto(txtNome.getText());
+            if(! txtEndereco.getText().isEmpty())
+                filtro.setEndereco(txtEndereco.getText());
+        } catch (RegraNegocioException ex) {
+            Logger.getLogger(ClienteBuscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
