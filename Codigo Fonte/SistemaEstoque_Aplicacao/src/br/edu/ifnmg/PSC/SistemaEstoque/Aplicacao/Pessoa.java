@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao;
 
+import static br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Validacoes.validarCpf;
 import java.util.Objects;
 
 /**
@@ -42,7 +43,9 @@ public abstract class Pessoa implements Entidade {
         return nomeCompleto;
     }
 
-    public void setNomeCompleto(String nomeCompleto) {
+    public void setNomeCompleto(String nomeCompleto) throws RegraNegocioException {
+        if(nomeCompleto.length() < 6)
+            throw new RegraNegocioException("o Nome Completo deve ter no minimo 7 caracteres!!");        
         this.nomeCompleto = nomeCompleto;
     }
 
@@ -50,9 +53,12 @@ public abstract class Pessoa implements Entidade {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(String cpf) throws RegraNegocioException {
+        if(!validarCpf(cpf))
+            throw new RegraNegocioException("Informe um Cpf válido!");
         this.cpf = cpf;
     }
+    
 
     @Override
     public int hashCode() {

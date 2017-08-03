@@ -32,7 +32,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Color minhaCor = new Color(176, 226, 255);
         
         this.getContentPane().setBackground(minhaCor); 
-        
+        lblIcone.setEnabled(false);
                 
     }
 
@@ -47,6 +47,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        lblIcone = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuPessoa = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -62,6 +63,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setTitle("Gerenciamento de Estoque Quebra-Mola");
         setBackground(new java.awt.Color(99, 184, 255));
         setExtendedState(6);
+
+        lblIcone.setIcon(new javax.swing.ImageIcon("/home/junior-ormundo/PSCMYPROJECTS/Trabalho-DSC/Codigo Fonte/SistemaEstoque_Apresentacao/Icons/gerenciador.png")); // NOI18N
 
         jMenuBar1.setBackground(new java.awt.Color(69, 59, 55));
 
@@ -107,11 +110,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 861, Short.MAX_VALUE)
+            .addGap(0, 929, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblIcone)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGap(0, 597, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblIcone)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -171,7 +184,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               
                 new TelaPrincipal().setVisible(true);
              }
         });
@@ -182,6 +194,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JLabel lblIcone;
     private javax.swing.JMenuItem mnuClientes;
     private javax.swing.JMenuItem mnuFornecedores;
     private javax.swing.JMenu mnuPessoa;
