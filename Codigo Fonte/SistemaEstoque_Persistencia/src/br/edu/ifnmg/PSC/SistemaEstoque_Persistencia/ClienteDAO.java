@@ -10,6 +10,7 @@ import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ClienteRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -97,7 +98,7 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
             obj.setCpf(resultado.getString("cpf"));
             obj.setEndereco(resultado.getString("endereco"));
             obj.setTelefone(resultado.getString("telefone"));
-            obj.setDataNascimento(resultado.getTime("dataNascimento"));
+            obj.setDataNascimento(new Date(resultado.getDate("dataNascimento").getTime()));
             
             return obj;
             

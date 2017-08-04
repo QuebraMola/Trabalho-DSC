@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,7 +35,7 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
 
     @Override
     protected String getConsultaUpdate() {
-         return "update produtos set descricao=?, fornecedor=?, valorCompra=?, porcentagemlucro=?,qtd=?,validade=? valorFinal=? where id = ?";
+         return "update produtos set descricao=?, fornecedor=?, valorCompra=?, porcentagemlucro=?,qtd=?,validade=? ,valorFinal=? where id = ?";
     }
 
     @Override
@@ -112,7 +113,7 @@ public class ProdutoDAO extends DAOGenerico<Produto> implements ProdutoRepositor
             obj.setValorCompra(resultado.getDouble("valorCompra"));
             obj.setPorcentagemLucro(resultado.getInt("porcentagemLucro"));
             obj.setQtd(resultado.getInt("qtd"));
-            obj.setValidade(resultado.getTime("validade"));
+            obj.setValidade(new Date(resultado.getDate("validade").getTime()));;
             obj.setValorFinal(resultado.getDouble("valorCompra"),resultado.getInt("porcentagemLucro"));
             
             return obj;

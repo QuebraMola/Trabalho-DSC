@@ -96,8 +96,13 @@ public class Fornecedor implements Entidade {
         }
         return true;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+
+   
     
     @Override
     public void setId(int id) {

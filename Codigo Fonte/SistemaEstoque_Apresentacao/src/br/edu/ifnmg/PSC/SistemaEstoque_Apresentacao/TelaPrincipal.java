@@ -32,7 +32,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Color minhaCor = new Color(176, 226, 255);
         
         this.getContentPane().setBackground(minhaCor); 
-        lblIcone.setEnabled(false);
+        
                 
     }
 
@@ -133,24 +133,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         UsuarioBuscar tela = new UsuarioBuscar(Repositorios.getUsuarioRepositorio(),UsuarioEditar.class);
         this.add(tela);
+        lblIcone.setEnabled(false);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void mnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuClientesActionPerformed
         ClienteBuscar tela = new ClienteBuscar(Repositorios.getClienteRepositorio(),ClienteEditar.class);
         this.add(tela);
+        lblIcone.setEnabled(false);
         tela.setVisible(true);
     }//GEN-LAST:event_mnuClientesActionPerformed
 
     private void mnuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProdutosActionPerformed
         ProdutoBuscar tela = new ProdutoBuscar(Repositorios.getProdutoRepositorio(),ProdutoEditar.class);
         this.add(tela);
+        lblIcone.setEnabled(false);
         tela.setVisible(true);
     }//GEN-LAST:event_mnuProdutosActionPerformed
 
     private void mnuFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFornecedoresActionPerformed
         FornecedorBuscar tela = new FornecedorBuscar(Repositorios.getFornecedorRepositorio(),FornecedorEditar.class);
         this.add(tela);
+        lblIcone.setEnabled(false);
         tela.setVisible(true);
     }//GEN-LAST:event_mnuFornecedoresActionPerformed
 
