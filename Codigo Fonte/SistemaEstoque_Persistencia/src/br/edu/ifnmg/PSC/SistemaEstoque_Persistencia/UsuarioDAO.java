@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque_Persistencia;
 
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Tipo;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Usuario;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.UsuarioRepositorio;
 import java.sql.PreparedStatement;
@@ -29,12 +30,12 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements UsuarioRepositor
     
     @Override
     protected String getConsultaInsert() {
-           return "insert into usuarios(nomeCompleto,nomeUsuario,cpf,senha) values (?,?,?,?) ";
+           return "insert into usuarios(nomeCompleto,nomeUsuario,cpf,tipo,senha) values (?,?,?,?,?) ";
     }
 
     @Override
     protected String getConsultaUpdate() {
-            return "update usuarios set nomeCompleto=?, nomeUsuario=?, cpf=?, senha=? where id = ?";
+            return "update usuarios set nomeCompleto=?, nomeUsuario=?, cpf=?, tipo=?, senha=? where id = ?";
     }
 
     @Override
@@ -44,12 +45,12 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements UsuarioRepositor
 
     @Override
     protected String getConsultaAbrir() {
-            return "select id,nomeCompleto,nomeUsuario,cpf,senha from usuarios where id=?";
+            return "select id,nomeCompleto,nomeUsuario,cpf,tipo,senha from usuarios where id=?";
     }
 
     @Override
     protected String getConsultaBuscar() {
-            return "select id,nomeCompleto,nomeUsuario,cpf from usuarios";
+            return "select id,nomeCompleto,nomeUsuario,cpf,tipo from usuarios";
     }
     
 
@@ -64,6 +65,10 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements UsuarioRepositor
         if(filtro.getNomeUsuario()!= null && !filtro.getNomeUsuario().isEmpty())
             this.adicionarFiltro("nomeUsuario", filtro.getNomeUsuario());
         
+       
+        if(filtro.getTipo() != null)
+            this.adicionarFiltro("tipo", filtro.getTipo().getId());
+    
         if(filtro.getSenha() != null && !filtro.getSenha().isEmpty())
             this.adicionarFiltro("senha", filtro.getSenha());
         
@@ -76,10 +81,12 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements UsuarioRepositor
             sql.setString(1, obj.getNomeCompleto());
             sql.setString(2, obj.getNomeUsuario());
             sql.setString(3,obj.getCpf());
-            sql.setString(4, obj.getSenha());
+            sql.setInt(4, obj.getTipo().getId());
+            sql.setString(5, obj.getSenha());
+            
             
             if(obj.getId() > 0)
-                sql.setInt(5, obj.getId());
+                sql.setInt(6, obj.getId());
             
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,6 +101,7 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements UsuarioRepositor
             obj.setId(resultado.getInt("id"));
             obj.setNomeCompleto(resultado.getString("nomeCompleto"));
             obj.setNomeUsuario(resultado.getString("nomeUsuario"));
+            obj.setTipo(Tipo.Abrir( resultado.getInt("tipo") ));
             obj.setCpf(resultado.getString("cpf"));
            // obj.setSenha(resultado.getString("senha"));
             
@@ -104,5 +112,7 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements UsuarioRepositor
         }
         return null;
     }
+
+   
     
 }

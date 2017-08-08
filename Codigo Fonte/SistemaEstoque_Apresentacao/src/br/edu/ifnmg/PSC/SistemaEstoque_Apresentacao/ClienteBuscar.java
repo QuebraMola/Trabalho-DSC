@@ -34,14 +34,9 @@ public class ClienteBuscar extends TelaBuscar<Cliente> {
         super(repositorio, tipo_tela);
         initComponents();
          Color minhaCor = new Color(176, 226, 255);
-
+         buscar();
         this.getContentPane().setBackground(minhaCor); 
         
-        
-        
-        
-       
-
     }
 
     /**

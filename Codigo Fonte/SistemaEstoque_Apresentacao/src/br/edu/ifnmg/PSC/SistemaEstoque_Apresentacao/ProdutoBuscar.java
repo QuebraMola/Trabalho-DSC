@@ -36,6 +36,8 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
         super(repositorio, tipo_tela);
         initComponents();
         
+        buscar();
+        
          Color minhaCor = new Color(176, 226, 255);
 
         this.getContentPane().setBackground(minhaCor); 
@@ -208,10 +210,14 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
 
     @Override
     public void preencheFiltro() {
-        if(! txtDescricao.getText().isEmpty())
-            filtro.setDescricao(txtDescricao.getText());
-        if(Integer.parseInt(spnQtd.getValue().toString()) > 0)
-            filtro.setQtd(Integer.parseInt(spnQtd.getValue().toString()));
+         try {
+             if(! txtDescricao.getText().isEmpty())
+                 filtro.setDescricao(txtDescricao.getText());
+             if(Integer.parseInt(spnQtd.getValue().toString()) > 0)
+                 filtro.setQtd(Integer.parseInt(spnQtd.getValue().toString()));
+         } catch (RegraNegocioException ex) {
+             Logger.getLogger(ProdutoBuscar.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
 
     @Override
@@ -219,7 +225,7 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
         
         DefaultTableModel modelo = new DefaultTableModel();
                
-        modelo.addColumn("ID");
+        modelo.addColumn("Código");
         modelo.addColumn("Descrição");
         modelo.addColumn("Fornecedor");
         modelo.addColumn("Valor de Compra");
@@ -247,6 +253,4 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
         
         tblBuscar.setModel(modelo);
     }
-
-  
 }

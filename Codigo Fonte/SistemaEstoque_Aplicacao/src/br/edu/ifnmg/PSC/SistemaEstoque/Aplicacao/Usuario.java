@@ -18,12 +18,14 @@ import java.util.Objects;
 public class Usuario extends Pessoa implements Entidade{
     
    private String nomeUsuario;
+   private Tipo tipo;
    private String senha;
 
-    public Usuario( int id,String nomeUsuario, String senha,String nomeCompleto, String cpf) {
+    public Usuario( int id,String nomeUsuario, String senha,String nomeCompleto, String cpf, Tipo tipo) {
         super(id, nomeCompleto, cpf);
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
+        this.tipo = tipo;
     }
 
 
@@ -36,6 +38,8 @@ public class Usuario extends Pessoa implements Entidade{
         int hash = 5;
         hash = 37 * hash + Objects.hashCode(this.nomeUsuario);
         hash = 37 * hash + Objects.hashCode(this.senha);
+        hash = 37 * hash + Objects.hashCode(this.tipo);
+        
         return hash;
     }
 
@@ -79,6 +83,14 @@ public class Usuario extends Pessoa implements Entidade{
         if(senha.length()< 3)
                throw new RegraNegocioException("A Senha deve ter mais de 3 caracteres!");        
         this.senha = senha;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
     

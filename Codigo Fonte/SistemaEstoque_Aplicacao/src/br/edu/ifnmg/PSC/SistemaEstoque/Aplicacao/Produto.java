@@ -70,7 +70,9 @@ public class Produto implements Entidade{
         return porcentagemLucro;
     }
 
-    public void setPorcentagemLucro(int porcentagemLucro) {
+    public void setPorcentagemLucro(int porcentagemLucro) throws RegraNegocioException {
+        if(porcentagemLucro < 0)
+            throw new RegraNegocioException("A Porcentagem de Lucro nunca deve ser Negativa!");
         this.porcentagemLucro = porcentagemLucro;
     }
 
@@ -78,7 +80,9 @@ public class Produto implements Entidade{
         return qtd;
     }
 
-    public void setQtd(int qtd) {
+    public void setQtd(int qtd) throws RegraNegocioException {
+        if(qtd < 0)
+            throw new RegraNegocioException("A Quantidade nunca deve ser Negativa!");
         this.qtd = qtd;
     }
 
@@ -86,7 +90,10 @@ public class Produto implements Entidade{
         return validade;
     }
 
-    public void setValidade(Date validade) {
+    public void setValidade(Date validade) throws RegraNegocioException{
+        Date data = new Date(System.currentTimeMillis());
+        if(validade.compareTo(data)<0)
+            throw new RegraNegocioException("Data Inválida !!!"); 
         this.validade = validade;
     }
     public void setValorFinal(double valorCompra, int porcentagemLucro){

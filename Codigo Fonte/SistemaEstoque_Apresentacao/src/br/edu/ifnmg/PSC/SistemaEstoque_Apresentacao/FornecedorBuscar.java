@@ -26,8 +26,8 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
     public FornecedorBuscar(Repositorio<Fornecedor> repositorio, Class tipo_tela) {
         super(repositorio, tipo_tela);
         initComponents();
-         Color minhaCor = new Color(176, 226, 255);
-
+        Color minhaCor = new Color(176, 226, 255);
+        buscar();
         this.getContentPane().setBackground(minhaCor); 
 
     }

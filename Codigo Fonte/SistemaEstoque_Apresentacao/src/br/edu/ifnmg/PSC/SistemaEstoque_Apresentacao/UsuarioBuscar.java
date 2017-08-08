@@ -7,10 +7,13 @@ package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Repositorio;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Tipo;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Usuario;
 import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,9 +30,11 @@ public class UsuarioBuscar extends TelaBuscar<Usuario> {
         super(repositorio, tipo_tela);
         initComponents();
        Color minhaCor = new Color(176, 226, 255);
-
+        buscar();
         this.getContentPane().setBackground(minhaCor); 
-       
+        ComboBoxModel model = new DefaultComboBoxModel(Tipo.values());
+        cbxTipo.setModel(model);
+
        
     }
 
@@ -52,8 +57,11 @@ public class UsuarioBuscar extends TelaBuscar<Usuario> {
         btnEditar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         btnApagar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        cbxTipo = new javax.swing.JComboBox<>();
 
         setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setTitle("Buscar Usuarios");
 
         jLabel1.setText("Nome Completo:");
@@ -105,6 +113,8 @@ public class UsuarioBuscar extends TelaBuscar<Usuario> {
             }
         });
 
+        jLabel3.setText("Tipo de Usuario:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,11 +130,13 @@ public class UsuarioBuscar extends TelaBuscar<Usuario> {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txtNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,15 +160,19 @@ public class UsuarioBuscar extends TelaBuscar<Usuario> {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(btnEditar)
                     .addComponent(btnNovo)
                     .addComponent(btnApagar))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,14 +187,14 @@ public class UsuarioBuscar extends TelaBuscar<Usuario> {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        filtro = new Usuario(0,null,null,null,null); 
+        filtro = new Usuario(0,null,null,null,null,null); 
         buscar();
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         apagar();
-        filtro = new Usuario(0,null,null,null,null); 
+        filtro = new Usuario(0,null,null,null,null,null); 
         buscar();
                
     }//GEN-LAST:event_btnApagarActionPerformed
@@ -215,7 +231,8 @@ public class UsuarioBuscar extends TelaBuscar<Usuario> {
         modelo.addColumn("ID");
         modelo.addColumn("Nome Completo");
         modelo.addColumn("Nome de Usuário");
-        modelo.addColumn("cpf");
+        modelo.addColumn("CPF");
+        modelo.addColumn("Tipo");
         
        
         for(Usuario s : listagem){
@@ -224,7 +241,8 @@ public class UsuarioBuscar extends TelaBuscar<Usuario> {
             linha.add(s.getNomeCompleto());
             linha.add(s.getNomeUsuario());
             linha.add(s.getCpf());
-            
+            linha.add(s.getTipo());
+                       
             modelo.addRow(linha);
         }
         
@@ -237,8 +255,10 @@ public class UsuarioBuscar extends TelaBuscar<Usuario> {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JComboBox<String> cbxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBuscar;
     private javax.swing.JTextField txtNomeCompleto;

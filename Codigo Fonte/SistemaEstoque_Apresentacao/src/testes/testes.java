@@ -10,6 +10,7 @@ import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.FornecedorRepositorio;
 
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Produto;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ProdutoRepositorio;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.FornecedorDAO;
 
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.ProdutoDAO;
@@ -26,7 +27,7 @@ import java.util.logging.Logger;
  */
 public class testes{ 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RegraNegocioException {
          
           try{
             FornecedorRepositorio fornecedor = new FornecedorDAO();

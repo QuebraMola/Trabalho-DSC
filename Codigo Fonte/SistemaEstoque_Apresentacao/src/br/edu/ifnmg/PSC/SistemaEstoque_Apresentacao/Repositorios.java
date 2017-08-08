@@ -9,10 +9,12 @@ import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ClienteRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.FornecedorRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ProdutoRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.UsuarioRepositorio;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.VendaRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.ClienteDAO;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.FornecedorDAO;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.ProdutoDAO;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.UsuarioDAO;
+import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.VendaDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -80,6 +82,18 @@ public class Repositorios {
         return produtoDAO;
     }
     
+    static VendaRepositorio vendaDAO = null;
     
+    public static VendaRepositorio getVendaRepositorio(){
+        if(vendaDAO == null)
+            try {
+                vendaDAO = new VendaDAO();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Repositorios.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Repositorios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return vendaDAO;
+    }
     
 }

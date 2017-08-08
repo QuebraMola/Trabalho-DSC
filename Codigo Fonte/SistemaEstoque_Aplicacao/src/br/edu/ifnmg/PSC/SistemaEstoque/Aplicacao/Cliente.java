@@ -33,7 +33,9 @@ public class Cliente extends Pessoa implements Entidade{
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(String telefone) throws RegraNegocioException {
+        if(telefone.contains("~[a-z]") || telefone.length() < 8)
+            throw new RegraNegocioException("Informe um Telefone Válido");
         this.telefone = telefone;
     }
 
@@ -49,7 +51,11 @@ public class Cliente extends Pessoa implements Entidade{
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) throws RegraNegocioException {
+       Date data = new Date(System.currentTimeMillis());
+        if(dataNascimento.compareTo(data)>0)
+            throw new RegraNegocioException("Data Inválida !!!");
+            
         this.dataNascimento = dataNascimento;
     }
 
