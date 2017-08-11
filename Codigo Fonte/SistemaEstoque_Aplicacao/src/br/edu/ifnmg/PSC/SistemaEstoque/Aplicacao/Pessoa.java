@@ -92,6 +92,11 @@ public abstract class Pessoa implements Entidade {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return nomeCompleto;
+    }
     
     
     

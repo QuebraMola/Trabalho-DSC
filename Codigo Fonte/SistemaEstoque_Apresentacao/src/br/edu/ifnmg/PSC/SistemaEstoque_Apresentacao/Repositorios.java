@@ -7,11 +7,13 @@ package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ClienteRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.FornecedorRepositorio;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ItensVendaRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ProdutoRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.UsuarioRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.VendaRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.ClienteDAO;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.FornecedorDAO;
+import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.ItensVendaDAO;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.ProdutoDAO;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.UsuarioDAO;
 import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.VendaDAO;
@@ -94,6 +96,20 @@ public class Repositorios {
                 Logger.getLogger(Repositorios.class.getName()).log(Level.SEVERE, null, ex);
             }
         return vendaDAO;
+    }
+    
+      static ItensVendaRepositorio itensvendaDAO = null;
+    
+    public static ItensVendaRepositorio getItensVendaRepositorio(){
+        if(itensvendaDAO == null)
+            try {
+                itensvendaDAO = new ItensVendaDAO();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Repositorios.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Repositorios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return itensvendaDAO;
     }
     
 }

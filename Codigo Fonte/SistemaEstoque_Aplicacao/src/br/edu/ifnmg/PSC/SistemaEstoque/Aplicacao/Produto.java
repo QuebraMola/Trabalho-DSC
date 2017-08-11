@@ -169,6 +169,11 @@ public class Produto implements Entidade{
     private double calculaValorFinal(double valorCompra, int porcentagemLucro) {
         return valorCompra+(valorCompra*porcentagemLucro/100);
     }
+
+    @Override
+    public String toString() {
+        return  descricao;
+    }
    
     
 }

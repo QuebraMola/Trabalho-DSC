@@ -5,17 +5,50 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Aplicacao;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Cliente;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ItensVenda;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Produto;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Venda;
+import static br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao.Repositorios.getClienteRepositorio;
+import static br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao.Repositorios.getItensVendaRepositorio;
+import static br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao.Repositorios.getProdutoRepositorio;
+import java.awt.Color;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author junior-ormundo
  */
-public class VendaEditar extends javax.swing.JInternalFrame {
+public class VendaEditar extends TelaEditar<Venda> {
 
     /**
      * Creates new form VendaEditar
      */
     public VendaEditar() {
         initComponents();
+        
+        entidade = new Venda();
+        
+        Color minhaCor = new Color(176, 226, 255);
+
+        this.getContentPane().setBackground(minhaCor); 
+   
+        List<Produto> produtos = null;
+        List<Cliente> clientes = null;
+        Produto filtro = new Produto(0,null,null,0,0,0,null,0);
+        Cliente filtro2 = new Cliente(0,null,null,null,null,null);
+        clientes = getClienteRepositorio().Buscar(filtro2);
+        produtos = getProdutoRepositorio().Buscar(filtro);
+        ComboBoxModel model = (new DefaultComboBoxModel(produtos.toArray()));
+        cbxProduto.setModel(model);
+        ComboBoxModel model2 = (new DefaultComboBoxModel(clientes.toArray()));
+        cbxCliente.setModel(model2);
     }
 
     /**
@@ -27,21 +60,235 @@ public class VendaEditar extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cbxProduto = new javax.swing.JComboBox<>();
+        spnQuantidade = new javax.swing.JSpinner();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblItens = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cbxCliente = new javax.swing.JComboBox<>();
+        txtDataVenda = new javax.swing.JFormattedTextField();
+        btnCarrinho = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+
+        setClosable(true);
+        setTitle("Realiza Venda");
+
+        jLabel1.setText("Produto:");
+
+        jLabel2.setText("Quantidade:");
+
+        cbxProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        tblItens.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tblItens);
+
+        jLabel3.setText("Cliente:");
+
+        jLabel4.setText("Data da Venda:");
+
+        cbxCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnCarrinho.setText("Add ao Carrinho");
+        btnCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarrinhoActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir do Carrinho");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnSalvar.setText("Salvar Venda");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar a Venda");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbxProduto, 0, 203, Short.MAX_VALUE)
+                    .addComponent(spnQuantidade))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                .addGap(81, 81, 81))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbxCliente, 0, 202, Short.MAX_VALUE)
+                    .addComponent(txtDataVenda))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cbxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCarrinho))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvar))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        delCarrinho();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        salvar();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarrinhoActionPerformed
+        addCarrinho();
+    }//GEN-LAST:event_btnCarrinhoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        cancelar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCarrinho;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cbxCliente;
+    private javax.swing.JComboBox<String> cbxProduto;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner spnQuantidade;
+    private javax.swing.JTable tblItens;
+    private javax.swing.JFormattedTextField txtDataVenda;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void carregaCampos() {
+        
+        cbxCliente.setSelectedItem(entidade.getCliente());
+        txtDataVenda.setValue(entidade.getDataVenda());
+        
+        List<ItensVenda> listagem = itensDaVenda(entidade);
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+               
+        modelo.addColumn("Descrição");
+        modelo.addColumn("Quantidade");
+        modelo.addColumn("Valor Unitário");
+        modelo.addColumn("Valor Total");
+        
+       
+        for(ItensVenda s : listagem){
+           
+                   
+            Vector linha = new Vector();
+            
+            linha.add(s.getProduto().getDescricao());
+            linha.add(s.getQtd());
+            linha.add(s.getProduto().getValorFinal());
+            
+            modelo.addRow(linha);
+        }
+        
+        tblItens.setModel(modelo);
+    }
+    
+    
+
+    @Override
+    public void carregaObjeto() throws RegraNegocioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean verificarCamposObrigatorios() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void addCarrinho(){
+    
+    }
+    
+    public void delCarrinho(){
+    
+    }
+
+    private List<ItensVenda> itensDaVenda(Venda entidade) {
+        List<ItensVenda> itens = null;
+        ItensVenda filtro = new ItensVenda(null,entidade,0);
+        itens = getItensVendaRepositorio().Buscar(filtro);
+        return itens;   
+    }
+
 }

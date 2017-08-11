@@ -34,7 +34,7 @@ public class VendaBuscar extends TelaBuscar<Venda> {
         
         initComponents();
         
-        buscar();
+      //  buscar();
         
          Color minhaCor = new Color(176, 226, 255);
 

@@ -88,7 +88,7 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio{
                 sql.setInt(5, obj.getId());
             
         } catch (SQLException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -104,13 +104,13 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio{
             obj.setId(resultado.getInt("id"));
             obj.setValorVenda(resultado.getDouble("valorVenda"));
             obj.setDataVenda(new Date(resultado.getDate("dataVenda").getTime()));;
-            obj.setCliente( cliente.Abrir( resultado.getInt("cliente") ) );
+            obj.setCliente( cliente.Abrir( resultado.getInt("cliente")) );
             obj.setFuncionario( funcionario.Abrir( resultado.getInt("funcionario") ) );
             
             return obj;
             
         } catch (Exception ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
