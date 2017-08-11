@@ -50,6 +50,7 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
     
     public void novo() {
         
+        
         try {
             tela_editar = (TelaEditar<Q>) tipo_tela.newInstance();
             
@@ -60,7 +61,7 @@ public abstract class TelaBuscar<Q extends Entidade> extends javax.swing.JIntern
         }
         
         tela_editar.setBuscar(this);
-        
+       
         tela_editar.setRepositorio(repositorio);
         
         tela_editar.setEntidade(filtro);

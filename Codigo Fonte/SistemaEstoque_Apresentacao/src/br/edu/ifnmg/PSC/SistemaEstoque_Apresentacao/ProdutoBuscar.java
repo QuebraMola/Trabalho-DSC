@@ -174,6 +174,7 @@ public class ProdutoBuscar extends TelaBuscar<Produto> {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+       filtro = new Produto(0,null,null,0,0,0,null,0);
         novo();
     }//GEN-LAST:event_btnNovoActionPerformed
 

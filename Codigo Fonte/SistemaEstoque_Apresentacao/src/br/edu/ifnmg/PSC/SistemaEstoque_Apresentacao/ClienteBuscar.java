@@ -177,7 +177,8 @@ public class ClienteBuscar extends TelaBuscar<Cliente> {
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-         novo();
+        filtro = new Cliente(0,null,null,null,null,null);  
+        novo();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

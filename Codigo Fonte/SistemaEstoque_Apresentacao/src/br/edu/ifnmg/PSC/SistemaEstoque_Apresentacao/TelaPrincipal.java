@@ -5,8 +5,10 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Aplicacao;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ClienteRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ProdutoRepositorio;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Tipo;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.UsuarioRepositorio;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -25,6 +27,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -74,8 +77,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         lblIcone = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        mnuPessoa = new javax.swing.JMenu();
+        mnuUsuario = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         mnuClientes = new javax.swing.JMenuItem();
         mnuProdutos = new javax.swing.JMenuItem();
@@ -83,8 +87,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mnuRelatorios = new javax.swing.JMenu();
         mnuEstoque = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        mnuUsuario = new javax.swing.JMenuItem();
+        mnuRelatorioClientes = new javax.swing.JMenuItem();
+        mnuRelatorioUsuario = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -99,9 +103,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblIcone.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         lblIcone.setFocusable(false);
 
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         jMenuBar1.setBackground(new java.awt.Color(69, 59, 55));
 
-        mnuPessoa.setText("Cadastros");
+        mnuUsuario.setText("Cadastros");
 
         jMenuItem3.setText("Usuarios");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +120,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        mnuPessoa.add(jMenuItem3);
+        mnuUsuario.add(jMenuItem3);
 
         mnuClientes.setText("Clientes");
         mnuClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +128,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 mnuClientesActionPerformed(evt);
             }
         });
-        mnuPessoa.add(mnuClientes);
+        mnuUsuario.add(mnuClientes);
 
         mnuProdutos.setText("Produtos");
         mnuProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +136,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 mnuProdutosActionPerformed(evt);
             }
         });
-        mnuPessoa.add(mnuProdutos);
+        mnuUsuario.add(mnuProdutos);
 
         mnuFornecedores.setText("Fornecedores");
         mnuFornecedores.addActionListener(new java.awt.event.ActionListener() {
@@ -133,9 +144,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 mnuFornecedoresActionPerformed(evt);
             }
         });
-        mnuPessoa.add(mnuFornecedores);
+        mnuUsuario.add(mnuFornecedores);
 
-        jMenuBar1.add(mnuPessoa);
+        jMenuBar1.add(mnuUsuario);
 
         jMenu1.setText("Vendas");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -160,21 +171,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         mnuRelatorios.add(mnuEstoque);
 
-        jMenuItem5.setText("Clientes");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        mnuRelatorioClientes.setText("Clientes");
+        mnuRelatorioClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                mnuRelatorioClientesActionPerformed(evt);
             }
         });
-        mnuRelatorios.add(jMenuItem5);
+        mnuRelatorios.add(mnuRelatorioClientes);
 
-        mnuUsuario.setText("Usuarios");
-        mnuUsuario.addActionListener(new java.awt.event.ActionListener() {
+        mnuRelatorioUsuario.setText("Usuarios");
+        mnuRelatorioUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuUsuarioActionPerformed(evt);
+                mnuRelatorioUsuarioActionPerformed(evt);
             }
         });
-        mnuRelatorios.add(mnuUsuario);
+        mnuRelatorios.add(mnuRelatorioUsuario);
 
         jMenuBar1.add(mnuRelatorios);
 
@@ -184,7 +195,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 929, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(778, Short.MAX_VALUE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -193,7 +207,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 597, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnLogout)
+                .addContainerGap(556, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -205,6 +222,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        if(Aplicacao.getUsuario().getTipo()!= Tipo.ADMINISTRADOR){
+            JOptionPane.showMessageDialog(rootPane, "Você não tem Permissão para Acessar essa área!");
+            return;
+        }
         UsuarioBuscar tela = new UsuarioBuscar(Repositorios.getUsuarioRepositorio(),UsuarioEditar.class);
         this.add(tela);
         tela.setVisible(false);
@@ -221,6 +242,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuClientesActionPerformed
 
     private void mnuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProdutosActionPerformed
+        if(Aplicacao.getUsuario().getTipo()!= Tipo.ADMINISTRADOR){
+            JOptionPane.showMessageDialog(rootPane, "Você não tem Permissão para Acessar essa área!");
+            return;
+        }
         ProdutoBuscar tela = new ProdutoBuscar(Repositorios.getProdutoRepositorio(),ProdutoEditar.class);
         this.add(tela);
         tela.setVisible(true);
@@ -228,6 +253,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuProdutosActionPerformed
 
     private void mnuFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFornecedoresActionPerformed
+       if(Aplicacao.getUsuario().getTipo()!= Tipo.ADMINISTRADOR){
+            JOptionPane.showMessageDialog(rootPane, "Você não tem Permissão para Acessar essa área!");
+            return;
+        }
         FornecedorBuscar tela = new FornecedorBuscar(Repositorios.getFornecedorRepositorio(),FornecedorEditar.class);
         this.add(tela);
         tela.setVisible(true);
@@ -242,26 +271,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         exibeRelatorioJasper("TProdutos.jasper", dao.Buscar(null), parametros);
     }//GEN-LAST:event_mnuEstoqueActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void mnuRelatorioClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatorioClientesActionPerformed
         ClienteRepositorio dao = Repositorios.getClienteRepositorio();
         
         Map parametros = new HashMap();
         
         exibeRelatorioJasper("Clientes.jasper", dao.Buscar(null), parametros);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_mnuRelatorioClientesActionPerformed
 
-    private void mnuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuUsuarioActionPerformed
+    private void mnuRelatorioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatorioUsuarioActionPerformed
         UsuarioRepositorio dao = Repositorios.getUsuarioRepositorio();
         
         Map parametros = new HashMap();
         
         exibeRelatorioJasper("Usuarios.jasper", dao.Buscar(null), parametros);
-    }//GEN-LAST:event_mnuUsuarioActionPerformed
+    }//GEN-LAST:event_mnuRelatorioUsuarioActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        VendaBuscar tela = new VendaBuscar(Repositorios.getVendaRepositorio(),VendaEditar.class);
-        this.add(tela);
-        tela.setVisible(true);
+
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
@@ -269,6 +296,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        actionLogout();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,19 +366,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogout;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JLabel lblIcone;
     private javax.swing.JMenuItem mnuClientes;
     private javax.swing.JMenuItem mnuEstoque;
     private javax.swing.JMenuItem mnuFornecedores;
-    private javax.swing.JMenu mnuPessoa;
     private javax.swing.JMenuItem mnuProdutos;
+    private javax.swing.JMenuItem mnuRelatorioClientes;
+    private javax.swing.JMenuItem mnuRelatorioUsuario;
     private javax.swing.JMenu mnuRelatorios;
-    private javax.swing.JMenuItem mnuUsuario;
+    private javax.swing.JMenu mnuUsuario;
     // End of variables declaration//GEN-END:variables
+
+    public void actionLogout() {
+       TelaLogin login = new TelaLogin();
+            
+       login.setTelaPrincipal(this);
+            
+       login.setVisible(true);
+       
+       this.setVisible(false);
+   
+    }
+
+
+
 }

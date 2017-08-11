@@ -1,29 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-    <background>
-        <band/>
-    </background>
-    <title>
-        <band height="79"/>
-    </title>
-    <pageHeader>
-        <band height="35"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="61"/>
-    </columnHeader>
-    <detail>
-        <band height="125"/>
-    </detail>
-    <columnFooter>
-        <band height="45"/>
-    </columnFooter>
-    <pageFooter>
-        <band height="54"/>
-    </pageFooter>
-    <summary>
-        <band height="42"/>
-    </summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TProdutos" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c5b4f36-c67a-428f-a41b-25364fa4a7cb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="efeitoZebra">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) != 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#BAB8B8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="dataset1" uuid="5bc001db-cb39-400a-9106-24bd0b85f716"/>
+	<subDataset name="dataset2" uuid="95adc842-5628-417b-91cc-8328de395100"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="validade" class="java.util.Date"/>
+	<field name="valorFinal" class="java.lang.Double"/>
+	<field name="fornecedor.nome" class="java.lang.String"/>
+	<field name="qtd" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="77" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="112" y="3" width="460" height="74" forecolor="#000000" backcolor="#C0C0C0" uuid="2e5b8f39-5038-4b37-b1ea-3fbee99f6cf8"/>
+				<box topPadding="30">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Ubuntu" size="34" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio de Produtos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="9" y="0" width="136" height="77" uuid="2ed73086-80eb-4f97-b9d4-ed3cc4ea0983"/>
+				<imageExpression><![CDATA["/home/junior-ormundo/PSCMYPROJECTS/Trabalho-DSC/Codigo Fonte/SistemaEstoque_Apresentacao/Icons/gerenciadorlogin.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="54" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="45" y="34" width="100" height="20" uuid="3f250caf-e416-477c-bbbd-aca1c22cd92d"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="34" width="45" height="20" uuid="a1fb57be-2a1a-45e0-95ee-7ff13bf05f98"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="14" width="85" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="f3707a9e-d7c0-429a-b679-fdf800850952"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="85" y="14" width="100" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="1d5369ba-5848-45a4-9b8d-592c5e659cc6"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="185" y="14" width="85" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="2a8515ce-fbf5-401e-8149-5bf47b132778"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="14" width="88" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="98c7c985-8d0d-490f-96d3-e8c3bfebbc07"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fornecedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="358" y="14" width="100" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="b0157802-05e4-4635-a916-57e1d5f8282f"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Valor ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="458" y="14" width="114" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="e457c7f1-96aa-46c2-ad94-7b3ac85525a5"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Data Validade]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="20" width="572" height="1" uuid="a10899bd-80e6-4295-a521-9b29f33ddf0d"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="7" width="85" height="20" uuid="386d5d21-fc0b-4017-828f-64ef109a28f3"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="7" width="100" height="20" uuid="e488d27e-67a0-438e-a54e-e87395d084e7"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="7" width="88" height="20" uuid="ba9a4078-a5c9-4bbf-af40-df99d8ee3268"/>
+				<textFieldExpression><![CDATA[$F{valorFinal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="6" width="88" height="20" uuid="97956bdb-4ca2-4c06-b484-a464fd946fe3"/>
+				<textFieldExpression><![CDATA[$F{fornecedor.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="6" width="85" height="20" uuid="1622ad5c-ee88-46ad-b862-17874f955ebc"/>
+				<textFieldExpression><![CDATA[$F{qtd}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="458" y="7" width="100" height="20" uuid="f928d01e-9c77-4e0d-9d25-af781c6e1d72"/>
+				<textFieldExpression><![CDATA[$F{validade}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="7" width="15" height="20" uuid="74670740-2d81-443a-870d-70429955c6d1"/>
+				<text><![CDATA[R$]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="445" y="34" width="80" height="20" uuid="8a7716b7-1e27-4218-bf3f-47ddd196c835"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="527" y="34" width="40" height="20" uuid="ad184445-47e1-4be7-a77c-6e75b134a5a8"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
 </jasperReport>

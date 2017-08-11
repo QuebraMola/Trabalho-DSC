@@ -5,11 +5,12 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
-import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Pessoa;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Tipo;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Usuario;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 
@@ -29,7 +30,10 @@ public class UsuarioEditar extends TelaEditar<Usuario> {
          Color minhaCor = new Color(176, 226, 255);
 
         this.getContentPane().setBackground(minhaCor); 
-        
+       /* List<String> tipos = new ArrayList<>();
+        for(Tipo t : Tipo.values())
+            tipos.add(t.toString());
+        */
         ComboBoxModel model = new DefaultComboBoxModel(Tipo.values());
         cbxTipo.setModel(model);
        
@@ -198,7 +202,7 @@ public class UsuarioEditar extends TelaEditar<Usuario> {
         entidade.setNomeCompleto(txtNome.getText());
         entidade.setNomeUsuario(txtNomeUsuario.getText());
         entidade.setCpf(txtCpf.getText());
-        entidade.setTipo((Tipo) cbxTipo.getSelectedItem());
+        entidade.setTipo((Tipo)( cbxTipo.getSelectedItem()));
         entidade.setSenha(String.copyValueOf( txtSenha.getPassword()));
    
     }
@@ -206,8 +210,8 @@ public class UsuarioEditar extends TelaEditar<Usuario> {
     @Override
     public boolean verificarCamposObrigatorios() {
         if (txtNome.getText().length() ==0 ||
-               txtNomeUsuario.getText().length() ==0 ||
-               cbxTipo.getSelectedItem() != null ||
+               txtNomeUsuario.getText().length() == 0 ||
+               cbxTipo.getSelectedItem() == null ||
                txtSenha.getPassword().length ==0)
             return false;
         return true;

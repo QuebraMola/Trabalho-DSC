@@ -183,6 +183,7 @@ public class UsuarioBuscar extends TelaBuscar<Usuario> {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        filtro = new Usuario(0,null,null,null,null,null);
         novo();
     }//GEN-LAST:event_btnNovoActionPerformed
 

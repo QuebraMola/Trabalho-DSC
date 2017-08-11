@@ -14,43 +14,81 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="19" width="555" height="40" uuid="2892e0b4-54fc-4739-b72d-b9477216b6a0"/>
-				<textElement textAlignment="Center">
-					<font fontName="Ubuntu" size="30" isBold="true"/>
+				<reportElement mode="Opaque" x="95" y="5" width="460" height="74" forecolor="#000000" backcolor="#C0C0C0" uuid="e209a642-df49-4393-8d3d-6151517bd727"/>
+				<box topPadding="30">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Ubuntu" size="34" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Relatorio de Usuarios]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="2" width="136" height="77" uuid="cb59aea9-29fc-4ea9-8173-d3f92e12ffe2"/>
+				<imageExpression><![CDATA["/home/junior-ormundo/PSCMYPROJECTS/Trabalho-DSC/Codigo Fonte/SistemaEstoque_Apresentacao/Icons/gerenciadorlogin.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="57" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="48" y="37" width="100" height="20" uuid="36238eda-d21b-4d1b-91a1-ef02ee4e6e4c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="37" width="45" height="20" uuid="22369e11-3b0e-4b80-81e6-d85eec28d950"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="41" splitType="Stretch">
+		<band height="37" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="7f082386-dc45-4d85-b8c4-258fc925c72f"/>
-				<text><![CDATA[id]]></text>
+				<reportElement mode="Opaque" x="0" y="0" width="100" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="2874ad76-4882-40b0-9f87-f66f5aad4da8"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="2" width="100" height="20" uuid="8449011d-a81d-49ee-94e2-afe8b29d92e0"/>
-				<text><![CDATA[nomeCompleto]]></text>
+				<reportElement mode="Opaque" x="200" y="0" width="100" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="5e863b59-5613-4e0c-9d6e-b6300b40cbb2"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="455" y="2" width="100" height="20" uuid="bc4567e4-b3bc-4d59-abd9-51bc0a9d05f5"/>
-				<text><![CDATA[nomeUsuario]]></text>
+				<reportElement mode="Opaque" x="100" y="0" width="100" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="73fdaea0-ab65-4f92-a20f-180a5b22d007"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="2" width="100" height="20" uuid="f357b60a-73a2-48e7-8b5d-54285c73b2d5"/>
-				<text><![CDATA[cpf]]></text>
+				<reportElement mode="Opaque" x="300" y="0" width="155" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="04232f58-0938-4623-b8c6-8b4a3adc9526"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Nome Completo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="0" width="100" height="20" uuid="19544853-3a6d-47f1-9802-fb5b8be18a5d"/>
-				<text><![CDATA[tipo]]></text>
+				<reportElement mode="Opaque" x="455" y="0" width="100" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="c86fcd67-1ffa-4f9d-b734-287c155e09fe"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Nome Usuario]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="47" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="8" width="100" height="20" uuid="ef042993-73b0-4d7a-9a52-53996fbfd00a"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
@@ -71,25 +109,26 @@
 				<reportElement x="200" y="8" width="100" height="20" uuid="c2965c95-055f-45bf-802d-ac1032f1496f"/>
 				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="0" y="28" width="555" height="1" uuid="9b6d9786-757f-45a9-aecc-e149f3bdc5cf"/>
+			</line>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch">
-			<image>
-				<reportElement x="373" y="2" width="43" height="43" uuid="63cc49ce-a02f-4633-a72d-650ad2a25ed0"/>
-				<imageExpression><![CDATA["/home/junior-ormundo/PSCMYPROJECTS/Trabalho-DSC/Codigo Fonte/SistemaEstoque_Apresentacao/Icons/deli.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="416" y="25" width="136" height="20" uuid="934a4ed5-4d20-4499-8c81-aafbf8dd6413"/>
-				<textElement>
-					<font isBold="false"/>
-				</textElement>
-				<text><![CDATA[Gerenciador Quebra-Mola]]></text>
-			</staticText>
-		</band>
+		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="432" y="34" width="80" height="20" uuid="62729085-45c2-4045-b61e-3933b9282279"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="a596963b-cd73-44c5-9062-b53f2d59ed5a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

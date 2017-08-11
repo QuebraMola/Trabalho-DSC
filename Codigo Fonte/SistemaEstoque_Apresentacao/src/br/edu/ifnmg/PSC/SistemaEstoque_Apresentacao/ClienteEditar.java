@@ -23,6 +23,9 @@ public class ClienteEditar extends TelaEditar<Cliente> {
      * Creates new form ClienteEditar
      */
     public ClienteEditar() {
+        
+        entidade = new Cliente();
+        
         initComponents();
         Color minhaCor = new Color(176, 226, 255);
 
@@ -181,6 +184,7 @@ public class ClienteEditar extends TelaEditar<Cliente> {
          try {
            
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+           
             entidade.setNomeCompleto(txtNome.getText());
             entidade.setEndereco(txtEndereco.getText());
             entidade.setCpf(txtCpf.getText());
@@ -188,7 +192,7 @@ public class ClienteEditar extends TelaEditar<Cliente> {
             entidade.setDataNascimento(df.parse(txtDataNasc.getText()));
    
          } catch (ParseException ex) {
-            Logger.getLogger(ProdutoEditar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteEditar.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
 

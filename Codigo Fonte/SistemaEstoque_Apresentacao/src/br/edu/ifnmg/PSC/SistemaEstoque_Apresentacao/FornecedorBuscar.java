@@ -160,7 +160,8 @@ public class FornecedorBuscar extends TelaBuscar<Fornecedor> {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-       novo();
+        filtro = new Fornecedor(0,null,null,null);
+        novo();
              
     }//GEN-LAST:event_btnNovoActionPerformed
 
