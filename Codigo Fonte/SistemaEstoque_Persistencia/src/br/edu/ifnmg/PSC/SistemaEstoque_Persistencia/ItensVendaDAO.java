@@ -36,17 +36,17 @@ public class ItensVendaDAO extends DAOGenerico<ItensVenda> implements ItensVenda
 
     @Override
     protected String getConsultaUpdate() {
-         return "update itensvenda set produto=?, venda=?, qtd=? where id = ?";
+         return "update itensvenda set produto=?, venda=?, qtd=?";
     }
 
     @Override
     protected String getConsultaDelete() {
-        return "delete from itensvenda where id=? ";
+        return "delete from itensvenda where produto=?,venda=? ";
     }
 
     @Override
     protected String getConsultaAbrir() {
-        return "select id,produto,venda,qtd from itensvenda where id=?";
+        return "select id,produto,venda,qtd from itensvenda where produto=?,venda=?";
     }
 
     @Override
@@ -56,8 +56,6 @@ public class ItensVendaDAO extends DAOGenerico<ItensVenda> implements ItensVenda
 
     @Override
     protected void setBuscaFiltros(ItensVenda filtro) {
-            if(filtro.getId() > 0)
-                this.adicionarFiltro("id", filtro.getId());
      
             if(filtro.getProduto() != null)
                 this.adicionarFiltro("produto", filtro.getProduto().getId());
@@ -77,10 +75,7 @@ public class ItensVendaDAO extends DAOGenerico<ItensVenda> implements ItensVenda
             sql.setInt(1, obj.getProduto().getId());
             sql.setInt(2, obj.getVenda().getId());
             sql.setInt(3,obj.getQtd());
-            
-            if(obj.getId() > 0)
-                sql.setInt(4, obj.getId());
-            
+                        
         } catch (SQLException ex) {
             Logger.getLogger(ItensVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,7 +89,6 @@ public class ItensVendaDAO extends DAOGenerico<ItensVenda> implements ItensVenda
      try {
 
             ItensVenda obj = new ItensVenda();
-            obj.setId(resultado.getInt("id"));
             obj.setProduto( produto.Abrir( resultado.getInt("produto") ) );
             obj.setVenda( venda.Abrir( resultado.getInt("venda") ) );
             obj.setQtd(resultado.getInt("qtd"));
