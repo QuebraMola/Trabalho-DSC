@@ -15,32 +15,33 @@ public class ItensVenda implements Entidade{
     
     private int id;    
     private Produto produto;
-    private Cliente cliente;
+    private Venda venda;
     private int qtd;
 
-    public ItensVenda(Produto produto, Cliente cliente, int qtd) {
+    public ItensVenda(Produto produto, Venda venda, int qtd) {
         this.produto = produto;
-        this.cliente = cliente;
+        this.venda = venda;
         this.qtd = qtd;
     }
 
     public ItensVenda() {
     }
 
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
+
+    
     public Produto getProduto() {
         return produto;
     }
 
     public void setProduto(Produto produto) {
         this.produto = produto;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public int getQtd() {
@@ -52,11 +53,22 @@ public class ItensVenda implements Entidade{
     }
 
     @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 11 * hash + Objects.hashCode(this.produto);
-        hash = 11 * hash + Objects.hashCode(this.cliente);
-        hash = 11 * hash + this.qtd;
+        int hash = 3;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.produto);
+        hash = 79 * hash + Objects.hashCode(this.venda);
+        hash = 79 * hash + this.qtd;
         return hash;
     }
 
@@ -72,26 +84,19 @@ public class ItensVenda implements Entidade{
             return false;
         }
         final ItensVenda other = (ItensVenda) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (this.qtd != other.qtd) {
             return false;
         }
         if (!Objects.equals(this.produto, other.produto)) {
             return false;
         }
-        if (!Objects.equals(this.cliente, other.cliente)) {
+        if (!Objects.equals(this.venda, other.venda)) {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public int getId() {
-        return id;
     }
     
     
