@@ -81,18 +81,11 @@
 				<text><![CDATA[Quantidade]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="270" y="14" width="88" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="98c7c985-8d0d-490f-96d3-e8c3bfebbc07"/>
+				<reportElement mode="Opaque" x="270" y="14" width="121" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="98c7c985-8d0d-490f-96d3-e8c3bfebbc07"/>
 				<textElement>
 					<font size="12" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Fornecedor]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="358" y="14" width="100" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="b0157802-05e4-4635-a916-57e1d5f8282f"/>
-				<textElement>
-					<font size="12" isBold="true" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Valor ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="458" y="14" width="114" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="e457c7f1-96aa-46c2-ad94-7b3ac85525a5"/>
@@ -100,6 +93,13 @@
 					<font size="12" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Data Validade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="391" y="14" width="67" height="20" forecolor="#010101" backcolor="#C0C0C0" uuid="b0157802-05e4-4635-a916-57e1d5f8282f"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Valor ]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -117,11 +117,11 @@
 				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="370" y="7" width="88" height="20" uuid="ba9a4078-a5c9-4bbf-af40-df99d8ee3268"/>
+				<reportElement x="409" y="7" width="49" height="20" uuid="ba9a4078-a5c9-4bbf-af40-df99d8ee3268"/>
 				<textFieldExpression><![CDATA[$F{valorFinal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="270" y="6" width="88" height="20" uuid="97956bdb-4ca2-4c06-b484-a464fd946fe3"/>
+				<reportElement x="270" y="6" width="121" height="20" uuid="97956bdb-4ca2-4c06-b484-a464fd946fe3"/>
 				<textFieldExpression><![CDATA[$F{fornecedor.nome}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -133,7 +133,7 @@
 				<textFieldExpression><![CDATA[$F{validade}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="355" y="7" width="15" height="20" uuid="74670740-2d81-443a-870d-70429955c6d1"/>
+				<reportElement x="394" y="6" width="15" height="20" uuid="74670740-2d81-443a-870d-70429955c6d1"/>
 				<text><![CDATA[R$]]></text>
 			</staticText>
 		</band>
