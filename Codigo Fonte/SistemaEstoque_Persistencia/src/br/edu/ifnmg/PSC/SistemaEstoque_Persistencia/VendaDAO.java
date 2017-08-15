@@ -5,6 +5,8 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque_Persistencia;
 
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Cliente;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Usuario;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Venda;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.VendaRepositorio;
 import java.sql.PreparedStatement;
@@ -24,6 +26,9 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio{
 
     public VendaDAO() throws ClassNotFoundException, SQLException {
         super();
+        cliente = new ClienteDAO();
+        funcionario = new UsuarioDAO();
+        
     }
 
 
@@ -104,8 +109,8 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio{
             obj.setId(resultado.getInt("id"));
             obj.setValorVenda(resultado.getDouble("valorVenda"));
             obj.setDataVenda(new Date(resultado.getDate("dataVenda").getTime()));;
-            obj.setCliente( cliente.Abrir( resultado.getInt("cliente")) );
-            obj.setFuncionario( funcionario.Abrir( resultado.getInt("funcionario") ) );
+            obj.setCliente(cliente.Abrir(resultado.getInt("cliente")));
+            obj.setFuncionario(funcionario.Abrir(resultado.getInt("funcionario")));
             
             return obj;
             
@@ -113,6 +118,16 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio{
             Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public int buscarUltimoId() {
+        return 0;
+    }
+
+    @Override
+    public boolean ExcluirItens(int idvenda) {
+        return true;
     }
     
 }

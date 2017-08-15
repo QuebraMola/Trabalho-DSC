@@ -5,9 +5,12 @@
  */
 package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ItensVenda;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Repositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Venda;
+import static br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao.Repositorios.getItensVendaRepositorio;
+import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.ItensVendaDAO;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -28,7 +31,7 @@ public class VendaBuscar extends TelaBuscar<Venda> {
      * Creates new form VendaBuscar
      */
      SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-     
+    
     public VendaBuscar(Repositorio<Venda> repositorio, Class tipo_tela) {
         super(repositorio, tipo_tela);
         
@@ -37,7 +40,7 @@ public class VendaBuscar extends TelaBuscar<Venda> {
       //  buscar();
         
          Color minhaCor = new Color(176, 226, 255);
-
+        buscar();
         this.getContentPane().setBackground(minhaCor); 
         
         
@@ -199,7 +202,8 @@ public class VendaBuscar extends TelaBuscar<Venda> {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-       novo();
+        filtro = new Venda(0,null,0,null,null);
+        novo();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
@@ -209,6 +213,7 @@ public class VendaBuscar extends TelaBuscar<Venda> {
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
         editar();
     }//GEN-LAST:event_btnEditarActionPerformed
 

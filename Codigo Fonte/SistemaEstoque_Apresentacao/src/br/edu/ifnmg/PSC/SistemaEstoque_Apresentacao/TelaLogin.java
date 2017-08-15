@@ -116,6 +116,12 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+       
+        if(txtUsuario.getText().length()==0){
+            lblMensagem.setText("Digite o Nome de Usuário!");  
+            return;
+        }
+        
         Usuario u = new Usuario(0,txtUsuario.getText(),String.valueOf( txtSenha.getPassword()),null,null,null);
         
         List<Usuario> lista = dao.Buscar(u);

@@ -10,5 +10,8 @@ package br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao;
  * @author junior-ormundo
  */
 public interface VendaRepositorio extends Repositorio<Venda>{
+    public int buscarUltimoId();
+    public boolean ExcluirItens(int idvenda);
+
     
 }

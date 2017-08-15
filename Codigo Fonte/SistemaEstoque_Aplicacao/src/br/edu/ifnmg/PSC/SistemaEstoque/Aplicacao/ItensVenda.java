@@ -18,7 +18,8 @@ public class ItensVenda implements Entidade{
     private Venda venda;
     private int qtd;
 
-    public ItensVenda(Produto produto, Venda venda, int qtd) {
+    public ItensVenda(int id,Produto produto, Venda venda, int qtd) {
+        this.id = id;
         this.produto = produto;
         this.venda = venda;
         this.qtd = qtd;

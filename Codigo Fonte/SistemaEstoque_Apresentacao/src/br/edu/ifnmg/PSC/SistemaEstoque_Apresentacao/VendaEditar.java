@@ -8,17 +8,29 @@ package br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Aplicacao;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Cliente;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ItensVenda;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ItensVendaRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Produto;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.ProdutoRepositorio;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.RegraNegocioException;
 import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.Venda;
+import br.edu.ifnmg.PSC.SistemaEstoque.Aplicacao.VendaRepositorio;
 import static br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao.Repositorios.getClienteRepositorio;
 import static br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao.Repositorios.getItensVendaRepositorio;
 import static br.edu.ifnmg.PSC.SistemaEstoque_Apresentacao.Repositorios.getProdutoRepositorio;
+import br.edu.ifnmg.PSC.SistemaEstoque_Persistencia.ItensVendaDAO;
 import java.awt.Color;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,25 +42,41 @@ public class VendaEditar extends TelaEditar<Venda> {
     /**
      * Creates new form VendaEditar
      */
+    Venda ultimaVenda;
+    VendaRepositorio daoVenda = Repositorios.getVendaRepositorio();
+    ProdutoRepositorio daoProduto = Repositorios.getProdutoRepositorio();
+    Produto novo;
+    ArrayList<Produto> listaVenda = new ArrayList<>();
+    ArrayList<Produto> busca = new ArrayList<>();
+    double valorVenda=0;
+    int qtd = 0;
+    int idProduto = 0;
+    ItensVenda daoItensVenda = new ItensVenda();
+    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    java.util.Date data =  new java.util.Date(System.currentTimeMillis());
+    String dataAtual = String.valueOf(df.format(data));
+        
+    
+
     public VendaEditar() {
         initComponents();
         
-        entidade = new Venda();
-        
-        Color minhaCor = new Color(176, 226, 255);
+       // entidade = new Venda();
+               Color minhaCor = new Color(176, 226, 255);
 
         this.getContentPane().setBackground(minhaCor); 
    
-        List<Produto> produtos = null;
+      
         List<Cliente> clientes = null;
-        Produto filtro = new Produto(0,null,null,0,0,0,null,0);
         Cliente filtro2 = new Cliente(0,null,null,null,null,null);
         clientes = getClienteRepositorio().Buscar(filtro2);
-        produtos = getProdutoRepositorio().Buscar(filtro);
-        ComboBoxModel model = (new DefaultComboBoxModel(produtos.toArray()));
-        cbxProduto.setModel(model);
         ComboBoxModel model2 = (new DefaultComboBoxModel(clientes.toArray()));
         cbxCliente.setModel(model2);
+        txtDataVenda.setValue(dataAtual);
+        ArrayList<Produto> itens = null;
+        ItensVenda filtragem = new ItensVenda(0,null,entidade,0);
+        itens = (ArrayList<Produto>) getProdutoRepositorio().Buscar(filtragem.getProduto());
+        preencherTabela(itens);
     }
 
     /**
@@ -62,27 +90,30 @@ public class VendaEditar extends TelaEditar<Venda> {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbxProduto = new javax.swing.JComboBox<>();
         spnQuantidade = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItens = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         cbxCliente = new javax.swing.JComboBox<>();
-        txtDataVenda = new javax.swing.JFormattedTextField();
         btnCarrinho = new javax.swing.JButton();
+        txtDataVenda = new javax.swing.JFormattedTextField();
         btnExcluir = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtDescricao = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtValor = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Realiza Venda");
 
-        jLabel1.setText("Produto:");
+        jLabel1.setText("Cod.Produto:");
 
         jLabel2.setText("Quantidade:");
-
-        cbxProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         tblItens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,28 +162,21 @@ public class VendaEditar extends TelaEditar<Venda> {
             }
         });
 
+        jLabel5.setText("Descrição:");
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Valor:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbxProduto, 0, 203, Short.MAX_VALUE)
-                    .addComponent(spnQuantidade))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
-                .addGap(81, 81, 81))
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -167,6 +191,35 @@ public class VendaEditar extends TelaEditar<Venda> {
                     .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
                 .addGap(65, 65, 65))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                            .addComponent(txtCodigo))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(163, 163, 163)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,16 +227,23 @@ public class VendaEditar extends TelaEditar<Venda> {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cbxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCarrinho))
+                    .addComponent(btnCarrinho)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir))
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,102 +253,220 @@ public class VendaEditar extends TelaEditar<Venda> {
                     .addComponent(jLabel4)
                     .addComponent(txtDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        delCarrinho();
+         int posicao = tblItens.getSelectedRow();
+         busca.remove(posicao);
+         if(posicao >= 0 ){
+            listaVenda.remove(posicao);
+            preencherTabela(listaVenda);
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        salvar();
+      
+        try {
+            guardaItensVenda();
+            salvar();
+            
+        } catch (RegraNegocioException ex) {
+            Logger.getLogger(VendaEditar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarrinhoActionPerformed
-        addCarrinho();
+        busca.add(novo);
+        novo = new Produto();
+        try {
+            this.recuperacampos();     
+        } catch (RegraNegocioException ex) {
+            Logger.getLogger(VendaEditar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listaVenda.add(novo);
+        preencherTabela(listaVenda);
+        limparCampos();
+        
     }//GEN-LAST:event_btnCarrinhoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         cancelar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        int codProduto = Integer.parseInt(txtCodigo.getText());
+        if(codProduto >= 0){
+            try {
+              novo = daoProduto.Abrir(codProduto); 
+              preencherCampos(novo);
+            } catch (Exception e) {
+                
+            }       
+        }
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCarrinho;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbxCliente;
-    private javax.swing.JComboBox<String> cbxProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner spnQuantidade;
     private javax.swing.JTable tblItens;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JFormattedTextField txtDataVenda;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
-
+    
+    
+   
     @Override
     public void carregaCampos() {
-        
-        cbxCliente.setSelectedItem(entidade.getCliente());
-        txtDataVenda.setValue(entidade.getDataVenda());
-        
-        List<ItensVenda> listagem = itensDaVenda(entidade);
-        
-        DefaultTableModel modelo = new DefaultTableModel();
-               
-        modelo.addColumn("Descrição");
-        modelo.addColumn("Quantidade");
-        modelo.addColumn("Valor Unitário");
-        modelo.addColumn("Valor Total");
-        
-       
-        for(ItensVenda s : listagem){
-           
-                   
-            Vector linha = new Vector();
-            
-            linha.add(s.getProduto().getDescricao());
-            linha.add(s.getQtd());
-            linha.add(s.getProduto().getValorFinal());
-            
-            modelo.addRow(linha);
-        }
-        
-        tblItens.setModel(modelo);
-    }
+        ArrayList<ItensVenda> itens = new ArrayList<>();
     
+        cbxCliente.setSelectedItem(entidade.getCliente());
+        txtDataVenda.setValue(df.format(entidade.getDataVenda()));
+       /* ItensVenda filtroI = new ItensVenda(null,entidade,0);
+        Produto filtroP = new Produto(filtroI.getId(),null,null,0,0,0,null,0);
+        
+        listaVenda = (ArrayList<Produto>) getProdutoRepositorio().Buscar(filtroP);
+        
+        preencherTabela(listaVenda);
+    */
+        
+    }
     
 
     @Override
     public void carregaObjeto() throws RegraNegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          try {
+           
+           
+            entidade.setDataVenda(df.parse(txtDataVenda.getText()));
+            entidade.setCliente((Cliente) cbxCliente.getSelectedItem());
+            entidade.setFuncionario(Aplicacao.getUsuario());
+            entidade.setValorVenda(calcularVenda());
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(ProdutoEditar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public boolean verificarCamposObrigatorios() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
     }
-    
-    public void addCarrinho(){
-    
+   
+      
+   private void preencherTabela(ArrayList<Produto> busca) {
+  
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        
+        modelo.addColumn("Cod Produto");
+        modelo.addColumn("Descrição");
+        modelo.addColumn("Quantidade");
+        modelo.addColumn("Valor");
+        
+       for(Produto c: busca){
+            Vector linha = new Vector();
+            
+            linha.add(c.getId());
+            linha.add(c.getDescricao());
+            linha.add(c.getQtd());
+            linha.add(c.getValorCompra());
+            modelo.addRow(linha);
+            
+        }
+       tblItens.setModel(modelo);
+        
     }
+   
+   private void recuperacampos() throws RegraNegocioException{
+
+        int id = Integer.parseInt(txtCodigo.getText());
+        novo.setId(id);
+        novo.setDescricao(txtDescricao.getText());
+        int qtd =Integer.parseInt(spnQuantidade.getValue().toString());
+        double valor = Double.parseDouble(txtValor.getText());
+        novo.setQtd(qtd);
+        novo.setValorCompra(valor);
+  
+}
+    private void preencherCampos(Produto novo) {
+       
+        String qtd = String.valueOf(novo.getQtd());
+        String valorFinal = String.valueOf(novo.getValorFinal());
+ 
+        
+        txtValor.setText(valorFinal);
+        txtDescricao.setText(novo.getDescricao());
+        spnQuantidade.setValue(qtd);
+     }
     
-    public void delCarrinho(){
-    
+      private void limparCampos() {
+        
+        txtCodigo.setText("");
+        txtDescricao.setText("");
+        spnQuantidade.setValue(0);
+        txtValor.setText("");
+        
     }
 
-    private List<ItensVenda> itensDaVenda(Venda entidade) {
-        List<ItensVenda> itens = null;
-        ItensVenda filtro = new ItensVenda(null,entidade,0);
-        itens = getItensVendaRepositorio().Buscar(filtro);
-        return itens;   
+    Venda venda;
+               
+    private void guardaItensVenda() throws RegraNegocioException {
+        venda = new Venda(0,null,0,null,null);  
+        if(entidade.getId()>0){
+                venda = entidade;
+        }
+         for(Produto c: listaVenda){
+            idProduto = c.getId();
+            qtd = c.getQtd();
+           
+            daoItensVenda = new ItensVenda(0,c,venda,qtd);
+            for(Produto a: busca){
+                if(a.getId() == idProduto){ 
+                   a.setQtd(a.getQtd() - qtd);
+                    daoProduto.Salvar(a);
+                }
+            }
+            try {
+                ItensVendaRepositorio bd_Itensvenda = new ItensVendaDAO();
+                bd_Itensvenda.Salvar(daoItensVenda);
+            } catch (SQLException ex) {
+                Logger.getLogger(VendaEditar.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VendaEditar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
+
+    private double calcularVenda() throws RegraNegocioException {
+        for(Produto c: listaVenda){
+            valorVenda = valorVenda + c.getQtd()*c.getValorCompra();
+        }
+        return valorVenda;
+
+        
+    }
+
+
+   
 }
